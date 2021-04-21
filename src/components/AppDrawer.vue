@@ -74,7 +74,7 @@ export default {
         .filter((item) => item.meta.hidden !== true)
         .map((item) => {
           return {
-            title: this.$t(item.meta.title),
+            title: item.meta.title,
             icon: item.meta.icon,
             path: item.path,
             isNew: item.meta.isNew || false,

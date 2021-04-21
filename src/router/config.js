@@ -9,7 +9,7 @@ export const publicRoute = [
     path: '/auth',
     component: LayoutAuth,
     meta: {
-      title: 'Login',
+      title: i18n.t('login'),
     },
     redirect: '/auth/login',
     hidden: true,
@@ -58,7 +58,7 @@ export const protectedRoute = [
         path: '/dashboard',
         name: 'dashboard',
         meta: {
-          title: 'dashboard',
+          title: i18n.t('dashboard'),
           icon: 'mdi-view-dashboard',
         },
         component: () => import('@/views/Dashboard.vue'),
@@ -68,7 +68,7 @@ export const protectedRoute = [
         path: '/403',
         name: 'Forbidden',
         meta: {
-          title: 'access_denied',
+          title: i18n.t('access deny'),
           hidden: true,
         },
         component: () => import('@/views/error/Deny.vue'),

@@ -27,7 +27,6 @@ const getters = {
   getUserStatus: (state) => state.status,
 }
 const actions = {
-  // just for demo
   login({ commit, dispatch }, { username, password }) {
     return request({
       url: '/auth/login',
@@ -53,7 +52,6 @@ const actions = {
     })
   },
   logout({ commit, dispatch }) {
-    dispatch('closeSocket')
     commit('SET_ACCESS_TOKEN', null)
   },
   // get current login user info
