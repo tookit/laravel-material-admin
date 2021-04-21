@@ -1,5 +1,6 @@
 import { LayoutAuth, LayoutDefault, RouteWrapper } from '@/components/layouts'
 import i18n from '../plugins/i18n'
+
 export const publicRoute = [
   {
     path: '*',

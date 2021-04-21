@@ -7,6 +7,7 @@ const state = {
     text: '',
     color: '',
   },
+  availableLanguages: [],
   locale: 'zh',
   notificatons: [],
 }
@@ -18,6 +19,7 @@ const getters = {
   getTheme: (state) => state.theme,
   getThemeColor: (state) => state.themeColor,
   getNotification: (state) => state.notificatons,
+  getVailableLanguages: (state) => state.availableLanguages,
 }
 
 // actions

@@ -4,8 +4,7 @@
       <v-col :cols="12">
         <v-card class="pa-3 page-login__card" tile>
           <v-card-title>
-            <img src="/static/m.png" alt="Vue Material Admin" height="48" contain />
-            <div class="primary--text display-1">Material Admin Template</div>
+            <div class="primary--text display-1">Laravel Material Admin</div>
           </v-card-title>
           <v-card-text>
             <v-form ref="form" v-model="formValid" class="my-10" lazy-validation>

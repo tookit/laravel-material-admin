@@ -93,10 +93,10 @@ export default {
       ]
     },
     availableLanguages() {
-      const { locales } = this.$vuetify.lang
-      return Object.keys(locales).map((lang) => {
+      const { messages } = this._i18n
+      return Object.keys(messages).map((lang) => {
         return {
-          text: locales[lang].label,
+          text: messages[lang][lang],
           value: lang,
         }
       })
