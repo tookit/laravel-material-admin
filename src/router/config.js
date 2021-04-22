@@ -19,7 +19,7 @@ export const publicRoute = [
         path: 'login',
         name: 'login',
         meta: {
-          title: 'Login',
+          title: i18n.t('login'),
         },
         component: () => import('@/views/auth/Login.vue'),
       },
@@ -30,7 +30,7 @@ export const publicRoute = [
     path: '/404',
     name: '404',
     meta: {
-      title: 'Not Found',
+      title: i18n.t('not found'),
     },
     component: () => import('@/views/error/NotFound.vue'),
   },
@@ -39,7 +39,7 @@ export const publicRoute = [
     path: '/500',
     name: '500',
     meta: {
-      title: 'Server Error',
+      title: i18n.t('server error'),
     },
     component: () => import('@/views/error/Error.vue'),
   },

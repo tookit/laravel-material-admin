@@ -6,13 +6,6 @@
     <v-container>
       <v-row column>
         <v-col>
-          <v-select
-            v-model="$vuetify.lang.current"
-            placeholder="Language"
-            label="Language"
-            :items="availableLanguages"
-            @change="changeLocale"
-          />
           <v-subheader class="px-1 my-2">Color Option</v-subheader>
           <div class="color-option">
             <v-item-group v-model="theme">
@@ -92,15 +85,7 @@ export default {
         },
       ]
     },
-    availableLanguages() {
-      const { messages } = this._i18n
-      return Object.keys(messages).map((lang) => {
-        return {
-          text: messages[lang][lang],
-          value: lang,
-        }
-      })
-    },
+
     theme: {
       get() {
         return this.getTheme
@@ -120,9 +105,6 @@ export default {
     updateTheme() {},
   },
   methods: {
-    changeLocale(lang) {
-      this.$vuetify.lang.current = lang
-    },
     handleChangeColor(option) {
       this.theme = option.key
       const color = this.colors[option.key].base

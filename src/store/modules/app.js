@@ -8,6 +8,7 @@ const state = {
     color: '',
   },
   availableLanguages: [],
+  translation: [],
   locale: 'zh',
   notificatons: [],
 }
@@ -19,7 +20,15 @@ const getters = {
   getTheme: (state) => state.theme,
   getThemeColor: (state) => state.themeColor,
   getNotification: (state) => state.notificatons,
-  getVailableLanguages: (state) => state.availableLanguages,
+  getAvailableLanguages: (state) => {
+    const translation = state.translation
+    return Object.keys(translation).map((lang) => {
+      return {
+        text: translation[lang][lang],
+        value: lang,
+      }
+    })
+  },
 }
 
 // actions
@@ -48,6 +57,9 @@ const mutations = {
   },
   SET_LOCALE(state, locale) {
     state.locale = locale
+  },
+  SET_TRANSLATION(state, data) {
+    state.translation = data
   },
   UPDATE_NOTIFICATION(state, payload) {
     state.notificatons.push(payload)
