@@ -63,20 +63,6 @@ export default {
         username: [(v) => !!v || this.$t('rule.required', ['username'])],
         password: [(v) => !!v || this.$t('rule.required', ['password'])],
       },
-      socialIcons: [
-        {
-          text: 'Google',
-          icon: 'mdi-google',
-        },
-        {
-          text: 'Facebook',
-          icon: 'mdi-facebook',
-        },
-        {
-          text: 'Twitter',
-          icon: 'mdi-twitter',
-        },
-      ],
     }
   },
   computed: {},
