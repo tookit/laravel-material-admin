@@ -50,7 +50,7 @@ export const protectedRoute = [
     path: '/',
     component: LayoutDefault,
     meta: {
-      title: 'home',
+      title: i18n.t('server error'),
       icon: '',
     },
     redirect: '/dashboard',
@@ -63,6 +63,48 @@ export const protectedRoute = [
           icon: 'mdi-view-dashboard',
         },
         component: () => import('@/views/Dashboard.vue'),
+      },
+      //cms
+      {
+        path: '/cms',
+        name: 'cms.index',
+        meta: {
+          title: i18n.t('cms'),
+          icon: 'mdi-newspaper',
+        },
+        component: RouterWrapper,
+        redirect: {
+          path: '/cms/post/list',
+        },
+        children: [
+          {
+            path: '/cms/post/list',
+            name: 'cms.post.list',
+            component: () => import('@/views/cms/post/PostList.vue'),
+            meta: {
+              title: i18n.t('post'),
+              icon: 'mdi-post',
+            },
+          },
+          // {
+          //   path: '/cms/tag/list',
+          //   name: 'cms.tag.list',
+          //   component: () => import('@/views/cms/tag/TagList.vue'),
+          //   meta: {
+          //     title: i18n.t('tag'),
+          //     icon: 'mdi-tag',
+          //   },
+          // },
+          // {
+          //   path: '/cms/category/list',
+          //   name: 'cms.category.list',
+          //   component: () => import('@/views/cms/category/CategoryList.vue'),
+          //   meta: {
+          //     title: i18n.t('category'),
+          //     icon: 'mdi-tag',
+          //   },
+          // },
+        ],
       },
 
       {
