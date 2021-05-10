@@ -72,19 +72,23 @@ export default {
               id: this.item.id,
               data: data,
             })
-            .then(() => {
+            .then(({ data }) => {
+              this.$emit('form:success', data)
               this.loading = false
             })
             .catch(() => {
+              this.$emit('form:failed')
               this.loading = false
             })
         } else {
           return this.$store
             .dispatch('createPostCategory', data)
-            .then(() => {
+            .then(({ data }) => {
+              this.$emit('form:success', data)
               this.loading = false
             })
             .catch(() => {
+              this.$emit('form:failed')
               this.loading = false
             })
         }

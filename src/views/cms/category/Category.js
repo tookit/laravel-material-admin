@@ -40,7 +40,7 @@ export default {
         },
         {
           text: 'Delete Item',
-          icon: 'mdi-trash',
+          icon: 'mdi-delete',
           click: this.handleDeleteItem,
         },
       ],
@@ -69,6 +69,10 @@ export default {
           'form:cancel': () => {
             dialog.hide()
           },
+          'form:success': () => {
+            this.$refs.grid.fetchRecords()
+            dialog.hide()
+          },
         },
       })
       dialog.show()
@@ -84,13 +88,19 @@ export default {
           'form:cancel': () => {
             dialog.hide()
           },
+          'form:success': () => {
+            this.$refs.grid.fetchRecords()
+            dialog.hide()
+          },
         },
       })
       dialog.show()
     },
     handleDeleteItem(item) {
       if (window.confirm('Are you sure to delete this ?')) {
-        this.$store.dispatch('deletePostCategory', item.id)
+        this.$store.dispatch('deletePostCategory', item.id).then(() => {
+          this.$refs.grid.fetchRecords()
+        })
       }
     },
   },
