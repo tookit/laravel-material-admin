@@ -14,8 +14,6 @@
 
 <script>
 import { VTextField, VTextarea, VAutocomplete } from 'vuetify/lib'
-import VEditor from '@/components/editor/VEditor'
-import TagSelect from '@/components/tag/TagSelect'
 import { mapGetters } from 'vuex'
 export default {
   props: {
@@ -30,55 +28,45 @@ export default {
   computed: {
     ...mapGetters(['getPostCategory']),
     formTitle() {
-      return this.item ? 'Edit Post - ' + this.item.name : 'Create Post'
+      return this.item ? 'Edit User - ' + this.item.name : 'Create User'
     },
     formItems() {
       return [
         {
-          cols: 12,
+          cols: 6,
           element: VTextField,
           props: {
-            name: 'name',
+            name: 'username',
             required: true,
             outlined: true,
-            rules: [(v) => !!v || 'Name is required'],
+            rules: [(v) => !!v || 'Username is required'],
           },
         },
         {
           cols: 6,
-          element: VAutocomplete,
+          element: VTextField,
           props: {
-            name: 'category_id',
+            name: 'email',
             required: true,
             outlined: true,
-            items: this.getPostCategory,
-            itemText: 'name',
-            itemValue: 'id',
-            rules: [(v) => !!v || 'Category is required'],
+            rules: [(v) => !!v || 'Email is required',],
           },
         },
         {
           cols: 6,
-          element: TagSelect,
+          element: VTextField,
           props: {
-            name: 'tags',
-            items: [],
-          },
-        },
-        {
-          cols: 12,
-          element: VTextarea,
-          props: {
-            name: 'description',
+            name: 'firstname',
+            required: true,
             outlined: true,
           },
         },
-
         {
-          cols: 12,
-          element: VEditor,
+          cols: 6,
+          element: VTextField,
           props: {
-            name: 'body',
+            name: 'lastname',
+            required: true,
             outlined: true,
           },
         },
@@ -89,7 +77,6 @@ export default {
     item: {
       handler(item) {
         this.formModel = Object.assign({}, item) || {}
-        this.formModel.tags = item && item.tags.length > 0 ? item.tags.map((item) => item.name) : []
       },
       immediate: true,
     },
@@ -102,7 +89,7 @@ export default {
         const data = this.transformData(this.formModel)
         if (this.item && this.item.id) {
           return this.$store
-            .dispatch('updatePost', {
+            .dispatch('updateUser', {
               id: this.item.id,
               data: data,
             })
@@ -116,7 +103,7 @@ export default {
             })
         } else {
           return this.$store
-            .dispatch('createPost', data)
+            .dispatch('createUser', data)
             .then(({ data }) => {
               this.$emit('form:success', data)
               this.loading = false

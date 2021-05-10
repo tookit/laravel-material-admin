@@ -8,7 +8,7 @@
           :filter-items="filterItems"
           :actions="actions"
           :data-source="dataSource"
-          search-field="name"
+          search-field="username"
           @create="handleCreateItem"
         />
       </v-col>
