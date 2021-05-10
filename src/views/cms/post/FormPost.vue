@@ -13,8 +13,9 @@
 </template>
 
 <script>
-import { VTextField, VTextarea, VAutocomplete } from 'vuetify/lib'
+import { VTextField, VTextarea, VAutocomplete, VCombobox } from 'vuetify/lib'
 import VEditor from '@/components/editor/VEditor'
+import TagSelect from '@/components/tag/TagSelect'
 import { mapGetters } from 'vuex'
 export default {
   props: {
@@ -58,14 +59,10 @@ export default {
         },
         {
           cols: 6,
-          element: VAutocomplete,
+          element: TagSelect,
           props: {
             name: 'tags',
-            required: true,
-            outlined: true,
             items: [],
-            itemText: 'name',
-            itemValue: 'id',
           },
         },
         {

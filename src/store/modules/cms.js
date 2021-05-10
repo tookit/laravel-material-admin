@@ -2,12 +2,23 @@ import request from '@/util/request'
 
 const state = {
   categories: [],
+  tags: [],
+  tagTypes: [
+    {
+      text: 'post',
+      value: 'post',
+    },
+  ],
 }
 
 // getters
 const getters = {
   getPostCategory: (state) => {
     return state.categories
+  },
+  getTagType: (state) => state.tagTypes,
+  getTagsByType: (state) => (type) => {
+    return state.tags.filter((item) => item.type === type)
   },
 }
 
@@ -46,6 +57,13 @@ const actions = {
       url: `cms/tag`,
       method: 'get',
       params: query,
+    })
+  },
+
+  fetchTagType(context) {
+    return request({
+      url: `cms/tag/type`,
+      method: 'get',
     })
   },
   createTag(context, data) {
