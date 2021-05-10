@@ -50,7 +50,7 @@ export const protectedRoute = [
     path: '/',
     component: LayoutDefault,
     meta: {
-      title: i18n.t('server error'),
+      title: i18n.t('home'),
       icon: '',
     },
     redirect: '/dashboard',
