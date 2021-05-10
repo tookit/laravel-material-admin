@@ -16,11 +16,31 @@ const actions = {
       params: query,
     })
   },
-  fetchCmsCategory(context, query) {
+  fetchPostCategory(context, query) {
     return request({
       url: `cms/category`,
       method: 'get',
       params: query,
+    })
+  },
+  createPostCategory(context, data) {
+    return request({
+      url: `cms/category`,
+      method: 'post',
+      data: data,
+    })
+  },
+  updatePostCategory(context, { id, data }) {
+    return request({
+      url: `cms/category/${id}`,
+      method: 'put',
+      data: data,
+    })
+  },
+  deletePostCategory(context, id) {
+    return request({
+      url: `cms/category/${id}`,
+      method: 'delete',
     })
   },
 }

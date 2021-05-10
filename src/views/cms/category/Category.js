@@ -1,3 +1,4 @@
+import FormCmsCategory from './FormCmsCategory'
 export default {
   data() {
     return {
@@ -37,13 +38,18 @@ export default {
           icon: 'mdi-pencil',
           click: this.handleEditItem,
         },
+        {
+          text: 'Delete Item',
+          icon: 'mdi-trash',
+          click: this.handleDeleteItem,
+        },
       ],
     }
   },
   computed: {
     dataSource() {
       return (q) => {
-        return this.$store.dispatch('fetchCmsCategory', q)
+        return this.$store.dispatch('fetchPostCategory', q)
       }
     },
     filterItems() {
@@ -66,6 +72,26 @@ export default {
         },
       })
       dialog.show()
+    },
+    handleEditItem(item) {
+      const dialog = this.$root.$dialog
+      dialog.loadComponent({
+        component: FormCmsCategory,
+        data: {
+          item: item,
+        },
+        on: {
+          'form:cancel': () => {
+            dialog.hide()
+          },
+        },
+      })
+      dialog.show()
+    },
+    handleDeleteItem(item) {
+      if (window.confirm('Are you sure to delete this ?')) {
+        this.$store.dispatch('deletePostCategory', item.id)
+      }
     },
   },
 }

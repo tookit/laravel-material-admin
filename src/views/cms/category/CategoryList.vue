@@ -9,6 +9,7 @@
           :actions="actions"
           :data-source="dataSource"
           search-field="name"
+          @create="handleCreateItem"
         />
       </v-col>
     </v-row>
