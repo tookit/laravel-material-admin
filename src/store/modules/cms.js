@@ -16,6 +16,13 @@ const actions = {
       params: query,
     })
   },
+  fetchCmsCategory(context, query) {
+    return request({
+      url: `cms/category`,
+      method: 'get',
+      params: query,
+    })
+  },
 }
 
 // mutations

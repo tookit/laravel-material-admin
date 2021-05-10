@@ -1,4 +1,3 @@
-import { VAutocomplete } from 'vuetify/lib'
 export default {
   data() {
     return {
@@ -20,10 +19,6 @@ export default {
               item.name
             )
           },
-        },
-        {
-          text: 'Category',
-          value: 'category.name',
         },
         {
           text: 'Created',
@@ -48,23 +43,11 @@ export default {
   computed: {
     dataSource() {
       return (q) => {
-        return this.$store.dispatch('fetchPost', q)
+        return this.$store.dispatch('fetchCmsCategory', q)
       }
     },
     filterItems() {
-      return [
-        {
-          element: VAutocomplete,
-          transform: (val) => parseInt(val),
-          cols: 4,
-          props: {
-            name: 'category_id',
-            items: this.getSupplierCategory,
-            itemText: 'name',
-            itemValue: 'id',
-          },
-        },
-      ]
+      return []
     },
   },
   watch: {},
@@ -72,7 +55,7 @@ export default {
     handleCreateItem() {
       const dialog = this.$root.$dialog
       dialog.loadComponent({
-        component: FormTask,
+        component: FormCmsCategory,
         data: {
           item: null,
         },
