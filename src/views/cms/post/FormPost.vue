@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { VTextField, VTextarea, VAutocomplete, VCombobox } from 'vuetify/lib'
+import { VTextField, VTextarea, VAutocomplete } from 'vuetify/lib'
 import VEditor from '@/components/editor/VEditor'
 import TagSelect from '@/components/tag/TagSelect'
 import { mapGetters } from 'vuex'
@@ -88,7 +88,8 @@ export default {
   watch: {
     item: {
       handler(item) {
-        this.formModel = item || {}
+        this.formModel = Object.assign({}, item) || {}
+        this.formModel.tags = item.tags.length > 0 ? item.tags.map((item) => item.name) : []
       },
       immediate: true,
     },

@@ -1,4 +1,4 @@
-import { VAutocomplete } from 'vuetify/lib'
+import { VAutocomplete, VChip } from 'vuetify/lib'
 import { mapGetters } from 'vuex'
 import FormPost from './FormPost'
 export default {
@@ -26,6 +26,23 @@ export default {
         {
           text: 'Category',
           value: 'category.name',
+        },
+        {
+          text: 'Tags',
+          value: 'tags',
+          render: (item) => {
+            return item.tags.map((tag) => {
+              return this.$createElement(
+                VChip,
+                {
+                  props: {
+                    small: true,
+                  },
+                },
+                tag.name
+              )
+            })
+          },
         },
         {
           text: 'Created',

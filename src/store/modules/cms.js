@@ -65,7 +65,7 @@ const actions = {
       url: `cms/tag/type`,
       method: 'get',
     }).then((resp) => {
-      commit('SET_TAG_TYPES', resp.data)
+      context.commit('SET_TAG_TYPES', resp.data)
       return resp
     })
   },
