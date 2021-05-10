@@ -103,12 +103,14 @@ export default {
         data: {
           item: item,
         },
-        'form:cancel': () => {
-          dialog.hide()
-        },
-        'form:success': () => {
-          this.$refs.grid.fetchRecords()
-          dialog.hide()
+        on: {
+          'form:cancel': () => {
+            dialog.hide()
+          },
+          'form:success': () => {
+            this.$refs.grid.fetchRecords()
+            dialog.hide()
+          },
         },
       })
       dialog.show()

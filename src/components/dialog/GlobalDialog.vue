@@ -22,6 +22,7 @@ export default {
   },
   methods: {
     loadComponent(option) {
+      console.log(option)
       const { component, data, on } = option
       this.component = component
       this.on = on
