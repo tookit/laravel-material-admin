@@ -6,7 +6,6 @@
 
 <script>
 export default {
-  name: 'CDialog',
   props: {
     width: {
       type: String,
