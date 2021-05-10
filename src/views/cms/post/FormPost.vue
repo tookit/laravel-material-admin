@@ -13,7 +13,8 @@
 </template>
 
 <script>
-import { VTextField, VTextarea } from 'vuetify/lib'
+import { VTextField, VTextarea, VAutocomplete } from 'vuetify/lib'
+import { mapGetters } from 'vuex'
 export default {
   props: {
     item: Object,
@@ -25,6 +26,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['getPostCategory']),
     formTitle() {
       return this.item ? 'Edit Post - ' + this.item.name : 'Create Post'
     },
@@ -40,7 +42,19 @@ export default {
             rules: [(v) => !!v || 'Name is required'],
           },
         },
-
+        {
+          cols: 12,
+          element: VAutocomplete,
+          props: {
+            name: 'category_id',
+            required: true,
+            outlined: true,
+            items: this.getPostCategory,
+            itemText: 'name',
+            itemValue: 'id',
+            rules: [(v) => !!v || 'Category is required'],
+          },
+        },
         {
           cols: 12,
           element: VTextarea,
@@ -73,18 +87,22 @@ export default {
               data: data,
             })
             .then(() => {
+              this.$emit('form:success', data)
               this.loading = false
             })
             .catch(() => {
+              this.$emit('form:failed', data)
               this.loading = false
             })
         } else {
           return this.$store
             .dispatch('createPost', data)
             .then(() => {
+              this.$emit('form:success', data)
               this.loading = false
             })
             .catch(() => {
+              this.$emit('form:failed', data)
               this.loading = false
             })
         }

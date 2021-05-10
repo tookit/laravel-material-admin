@@ -1,11 +1,15 @@
 import request from '@/util/request'
 
 const state = {
-  catgories: [],
+  categories: [],
 }
 
 // getters
-const getters = {}
+const getters = {
+  getPostCategory: (state) => {
+    return state.categories
+  },
+}
 
 // actions
 const actions = {
@@ -16,11 +20,38 @@ const actions = {
       params: query,
     })
   },
+
+  createPost(context, data) {
+    return request({
+      url: `cms/post`,
+      method: 'post',
+      data: data,
+    })
+  },
+  updatePost(context, { id, data }) {
+    return request({
+      url: `cms/post/${id}`,
+      method: 'put',
+      data: data,
+    })
+  },
+  deletePost(context, id) {
+    return request({
+      url: `cms/post/${id}`,
+      method: 'delete',
+    })
+  },
+
   fetchPostCategory(context, query) {
     return request({
       url: `cms/category`,
       method: 'get',
       params: query,
+    }).then((resp) => {
+      if (query.pageSize === -1) {
+        context.commit('SET_POST_CATEGORIES', resp.data)
+      }
+      return resp
     })
   },
   createPostCategory(context, data) {
@@ -47,8 +78,8 @@ const actions = {
 
 // mutations
 const mutations = {
-  SET_CMS_CATEGORIES(state, data) {
-    state.catgories = data
+  SET_POST_CATEGORIES(state, data) {
+    state.categories = data
   },
 }
 

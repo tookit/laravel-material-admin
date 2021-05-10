@@ -24,5 +24,8 @@ export default {
     PageList,
   },
   mixins: [Mixin],
+  created() {
+    this.$store.dispatch('fetchPostCategory', { pageSize: -1 })
+  },
 }
 </script>

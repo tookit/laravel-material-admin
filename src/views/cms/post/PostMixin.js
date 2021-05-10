@@ -1,4 +1,5 @@
 import { VAutocomplete } from 'vuetify/lib'
+import { mapGetters } from 'vuex'
 import FormPost from './FormPost'
 export default {
   data() {
@@ -43,10 +44,16 @@ export default {
           icon: 'mdi-pencil',
           click: this.handleEditItem,
         },
+        {
+          text: 'Delete Item',
+          icon: 'mdi-delete',
+          click: this.handleDeleteItem,
+        },
       ],
     }
   },
   computed: {
+    ...mapGetters(['getPostCategory']),
     dataSource() {
       return (q) => {
         return this.$store.dispatch('fetchPost', q)
@@ -60,7 +67,7 @@ export default {
           cols: 4,
           props: {
             name: 'category_id',
-            items: this.getSupplierCategory,
+            items: this.getPostCategory,
             itemText: 'name',
             itemValue: 'id',
           },
@@ -81,6 +88,10 @@ export default {
           'form:cancel': () => {
             dialog.hide()
           },
+          'form:success': () => {
+            this.$refs.grid.fetchRecords()
+            dialog.hide()
+          },
         },
       })
       dialog.show()
@@ -92,13 +103,22 @@ export default {
         data: {
           item: item,
         },
-        on: {
-          'form:cancel': () => {
-            dialog.hide()
-          },
+        'form:cancel': () => {
+          dialog.hide()
+        },
+        'form:success': () => {
+          this.$refs.grid.fetchRecords()
+          dialog.hide()
         },
       })
       dialog.show()
+    },
+    handleDeleteItem(item) {
+      if (window.confirm('Are you sure to delete this ?')) {
+        this.$store.dispatch('deletePost', item.id).then(() => {
+          this.$refs.grid.fetchRecords()
+        })
+      }
     },
   },
 }
