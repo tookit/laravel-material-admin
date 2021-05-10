@@ -8,9 +8,9 @@
     :width="drawerWidth"
   >
     <v-toolbar color="primary darken-1" dark>
-      <img :src="computeLogo" height="36" alt="Vue Material Admin Template" />
+      <img :src="computeLogo" height="36" :alt="site" />
       <v-toolbar-title>
-        <span class="hidden-sm-and-down">Vue Material</span>
+        <span class="hidden-sm-and-down">{{ site }}</span>
       </v-toolbar-title>
     </v-toolbar>
     <vue-perfect-scrollbar class="app-drawer__scrollbar">
@@ -45,6 +45,7 @@ export default {
   data() {
     return {
       mini: false,
+      site: 'Laravel Material',
       showDrawer: true,
       drawerWidth: 256,
       scrollSettings: {

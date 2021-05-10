@@ -89,7 +89,7 @@ export default {
     item: {
       handler(item) {
         this.formModel = Object.assign({}, item) || {}
-        this.formModel.tags = item.tags.length > 0 ? item.tags.map((item) => item.name) : []
+        this.formModel.tags = item && item.tags.length > 0 ? item.tags.map((item) => item.name) : []
       },
       immediate: true,
     },

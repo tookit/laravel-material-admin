@@ -8,6 +8,7 @@ export default {
         {
           text: 'id',
           value: 'id',
+          sortable: true,
         },
         {
           text: 'name',
@@ -22,19 +23,23 @@ export default {
               item.name
             )
           },
+          sortable: true,
         },
         {
           text: 'Category',
           value: 'category.name',
+          sortable: false,
         },
         {
           text: 'Tags',
           value: 'tags',
+          sortable: false,
           render: (item) => {
             return item.tags.map((tag) => {
               return this.$createElement(
                 VChip,
                 {
+                  class: 'mr-2',
                   props: {
                     small: true,
                   },
