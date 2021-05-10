@@ -107,6 +107,31 @@ export const protectedRoute = [
         ],
       },
 
+      //acl
+      {
+        path: '/acl',
+        name: 'acl.index',
+        meta: {
+          title: i18n.t('acl'),
+          icon: 'mdi-newspaper',
+        },
+        component: RouteWrapper,
+        redirect: {
+          path: '/acl/user/list',
+        },
+        children: [
+          {
+            path: '/acl/user/list',
+            name: 'acl.user.list',
+            component: () => import('@/views/acl/user/UserList.vue'),
+            meta: {
+              title: i18n.t('user'),
+              icon: 'mdi-account',
+            },
+          },
+        ],
+      },
+
       {
         path: '/403',
         name: 'Forbidden',
