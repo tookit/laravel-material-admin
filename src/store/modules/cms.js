@@ -64,6 +64,9 @@ const actions = {
     return request({
       url: `cms/tag/type`,
       method: 'get',
+    }).then((resp) => {
+      commit('SET_TAG_TYPES', resp.data)
+      return resp
     })
   },
   createTag(context, data) {
@@ -125,6 +128,14 @@ const actions = {
 const mutations = {
   SET_POST_CATEGORIES(state, data) {
     state.categories = data
+  },
+  SET_TAG_TYPES(state, data) {
+    state.tagTypes = data.map((type) => {
+      return {
+        text: type,
+        value: type,
+      }
+    })
   },
 }
 

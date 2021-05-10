@@ -77,7 +77,7 @@ export default {
     },
   },
   created() {
-    // this.$store.dispatch('fetchTagType')
+    this.$store.dispatch('fetchTagType')
   },
   methods: {
     handleChange(val) {
