@@ -17,7 +17,7 @@
 
 <script>
 import PageList from '@/components/page/PageList'
-import Mixin from './Post'
+import Mixin from './Category'
 export default {
   components: {
     PageList,

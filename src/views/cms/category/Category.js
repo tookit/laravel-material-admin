@@ -1,4 +1,4 @@
-import { VAutocomplete, VImg } from 'vuetify/lib'
+import { VAutocomplete } from 'vuetify/lib'
 export default {
   data() {
     return {
@@ -24,10 +24,6 @@ export default {
         {
           text: 'Category',
           value: 'category.name',
-        },
-        {
-          text: 'Sales',
-          value: 'sales',
         },
         {
           text: 'Created',
