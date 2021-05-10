@@ -10,8 +10,11 @@ import vuetify from './plugins/vuetify'
 import i18n from './plugins/i18n'
 import '@mdi/font/css/materialdesignicons.css'
 import 'jodit/build/jodit.css'
+import VFormBuilder from '@/components/form-builder/VFormBuilder'
 
 Vue.config.productionTip = false
+Vue.component('VFormBuilder', VFormBuilder)
+Vue.use(VFormBuilder)
 
 const app = new Vue({
   router,

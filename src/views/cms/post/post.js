@@ -1,5 +1,4 @@
 import { VAutocomplete, VImg } from 'vuetify/lib'
-import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -7,20 +6,6 @@ export default {
         {
           text: 'id',
           value: 'id',
-        },
-        {
-          text: 'Image',
-          value: 'images',
-          render: (item) => {
-            return this.$createElement(VImg, {
-              class: 'ma-2',
-              props: {
-                src: item.images ? item.images[0] : '',
-                height: 50,
-                width: 50,
-              },
-            })
-          },
         },
         {
           text: 'name',
@@ -39,22 +24,6 @@ export default {
         {
           text: 'Category',
           value: 'category.name',
-        },
-        {
-          text: 'Supplier',
-          value: 'supplier.name',
-          render: (item) => {
-            return this.$createElement(
-              'a',
-              {
-                domProps: {
-                  target: '_blank',
-                  href: item.supplier.url,
-                },
-              },
-              item.supplier.name
-            )
-          },
         },
         {
           text: 'Sales',
@@ -81,10 +50,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getPlatformList', 'getSupplierCategory']),
     dataSource() {
       return (q) => {
-        return this.$store.dispatch('fetchSupplierItemList', q)
+        return this.$store.dispatch('fetch', q)
       }
     },
     filterItems() {

@@ -7,9 +7,7 @@
           text
           solo
           flat
-          :prepend-icon="
-            showFilter ? 'mdi-filter-variant-plus' : 'mdi-filter-variant'
-          "
+          :prepend-icon="showFilter ? 'mdi-filter-variant-plus' : 'mdi-filter-variant'"
           append-icon="mdi-magnify"
           placeholder="search"
           hide-details
@@ -88,11 +86,7 @@
           </v-list>
         </v-menu>
       </template>
-      <template
-        v-for="(_, name) in $scopedSlots"
-        :slot="name"
-        slot-scope="slotData"
-      >
+      <template v-for="(_, name) in $scopedSlots" :slot="name" slot-scope="slotData">
         <slot :name="name" v-bind="slotData" />
       </template>
     </v-grid>

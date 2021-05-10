@@ -72,7 +72,7 @@ export const protectedRoute = [
           title: i18n.t('cms'),
           icon: 'mdi-newspaper',
         },
-        component: RouterWrapper,
+        component: RouteWrapper,
         redirect: {
           path: '/cms/post/list',
         },

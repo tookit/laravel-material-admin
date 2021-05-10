@@ -1,22 +1,6 @@
 import request from '@/util/request'
 
-const state = {
-  projects: [],
-  taskStatus: [
-    {
-      text: 'Todo',
-      value: 0,
-    },
-    {
-      text: 'Progress',
-      value: 1,
-    },
-    {
-      text: 'Done',
-      value: 2,
-    },
-  ],
-}
+const state = {}
 
 // getters
 const getters = {
