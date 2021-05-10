@@ -86,15 +86,15 @@ export const protectedRoute = [
               icon: 'mdi-post',
             },
           },
-          // {
-          //   path: '/cms/tag/list',
-          //   name: 'cms.tag.list',
-          //   component: () => import('@/views/cms/tag/TagList.vue'),
-          //   meta: {
-          //     title: i18n.t('tag'),
-          //     icon: 'mdi-tag',
-          //   },
-          // },
+          {
+            path: '/cms/tag/list',
+            name: 'cms.tag.list',
+            component: () => import('@/views/cms/tag/TagList.vue'),
+            meta: {
+              title: i18n.t('tag'),
+              icon: 'mdi-tag',
+            },
+          },
           {
             path: '/cms/category/list',
             name: 'cms.category.list',

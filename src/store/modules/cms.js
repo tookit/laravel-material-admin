@@ -20,7 +20,6 @@ const actions = {
       params: query,
     })
   },
-
   createPost(context, data) {
     return request({
       url: `cms/post`,
@@ -38,6 +37,34 @@ const actions = {
   deletePost(context, id) {
     return request({
       url: `cms/post/${id}`,
+      method: 'delete',
+    })
+  },
+
+  fetchTag(context, query) {
+    return request({
+      url: `cms/tag`,
+      method: 'get',
+      params: query,
+    })
+  },
+  createTag(context, data) {
+    return request({
+      url: `cms/tag`,
+      method: 'post',
+      data: data,
+    })
+  },
+  updateTag(context, { id, data }) {
+    return request({
+      url: `cms/tag/${id}`,
+      method: 'put',
+      data: data,
+    })
+  },
+  deleteTag(context, id) {
+    return request({
+      url: `cms/tag/${id}`,
       method: 'delete',
     })
   },
