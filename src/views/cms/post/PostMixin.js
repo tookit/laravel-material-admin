@@ -1,4 +1,5 @@
 import { VAutocomplete } from 'vuetify/lib'
+import FormPost from './FormPost'
 export default {
   data() {
     return {
@@ -72,9 +73,24 @@ export default {
     handleCreateItem() {
       const dialog = this.$root.$dialog
       dialog.loadComponent({
-        component: FormTask,
+        component: FormPost,
         data: {
           item: null,
+        },
+        on: {
+          'form:cancel': () => {
+            dialog.hide()
+          },
+        },
+      })
+      dialog.show()
+    },
+    handleEditItem(item) {
+      const dialog = this.$root.$dialog
+      dialog.loadComponent({
+        component: FormPost,
+        data: {
+          item: item,
         },
         on: {
           'form:cancel': () => {

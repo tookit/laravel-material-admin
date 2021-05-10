@@ -20,15 +20,19 @@
         </v-btn>
       </template>
     </v-snackbar>
+    <!-- global dialog -->
+    <global-dialog ref="dialog" />
   </v-app>
 </template>
 
 <script>
 import ThemeSettings from '@/components/ThemeSettings'
 import { mapGetters } from 'vuex'
+import GlobalDialog from './components/dialog/GlobalDialog.vue'
 export default {
   components: {
     ThemeSettings,
+    GlobalDialog,
   },
   data() {
     return {
@@ -51,6 +55,7 @@ export default {
     if (typeof window !== undefined && window._VMA === undefined) {
       window._VMA = this
     }
+    this.$root.$dialog = this.$refs.dialog
   },
   created() {},
   methods: {
