@@ -14,6 +14,7 @@
 
 <script>
 import { VTextField, VTextarea, VAutocomplete } from 'vuetify/lib'
+import VEditor from '@/components/editor/VEditor'
 import { mapGetters } from 'vuex'
 export default {
   props: {
@@ -43,7 +44,7 @@ export default {
           },
         },
         {
-          cols: 12,
+          cols: 6,
           element: VAutocomplete,
           props: {
             name: 'category_id',
@@ -56,10 +57,31 @@ export default {
           },
         },
         {
+          cols: 6,
+          element: VAutocomplete,
+          props: {
+            name: 'tags',
+            required: true,
+            outlined: true,
+            items: [],
+            itemText: 'name',
+            itemValue: 'id',
+          },
+        },
+        {
           cols: 12,
           element: VTextarea,
           props: {
             name: 'description',
+            outlined: true,
+          },
+        },
+
+        {
+          cols: 12,
+          element: VEditor,
+          props: {
+            name: 'body',
             outlined: true,
           },
         },

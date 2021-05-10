@@ -1,5 +1,6 @@
 <template>
   <div class="v-editor">
+    <label>{{ label }}</label>
     <textarea ref="editor" />
   </div>
 </template>
@@ -11,6 +12,10 @@ export default {
   name: 'VEditor',
   components: {},
   props: {
+    label: {
+      type: String,
+      default: 'Editor',
+    },
     option: {
       type: Object,
       default: () => {
