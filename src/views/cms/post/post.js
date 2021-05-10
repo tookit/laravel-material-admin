@@ -52,22 +52,11 @@ export default {
   computed: {
     dataSource() {
       return (q) => {
-        return this.$store.dispatch('fetch', q)
+        return this.$store.dispatch('fetchPost', q)
       }
     },
     filterItems() {
       return [
-        {
-          element: VAutocomplete,
-          transform: (val) => parseInt(val),
-          cols: 4,
-          props: {
-            name: 'platform_id',
-            items: this.getPlatformList,
-            itemText: 'name',
-            itemValue: 'id',
-          },
-        },
         {
           element: VAutocomplete,
           transform: (val) => parseInt(val),
