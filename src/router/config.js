@@ -130,6 +130,15 @@ export const protectedRoute = [
               icon: 'mdi-account',
             },
           },
+          {
+            path: '/acl/role/list',
+            name: 'acl.role.list',
+            component: () => import('@/views/acl/role/RoleList.vue'),
+            meta: {
+              title: i18n.t('role'),
+              icon: 'mdi-account-group',
+            },
+          },
         ],
       },
 

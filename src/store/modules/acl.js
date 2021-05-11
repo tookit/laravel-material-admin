@@ -72,6 +72,33 @@ const actions = {
       return resp
     })
   },
+  fetchRole(context, query) {
+    return request({
+      url: `/acl/role/`,
+      method: 'get',
+      params: query,
+    })
+  },
+  createRole(context, data) {
+    return request({
+      url: `/acl/role/`,
+      method: 'post',
+      data: data,
+    })
+  },
+  updateRole(context, { id, data }) {
+    return request({
+      url: `/acl/role/${id}`,
+      method: 'put',
+      data: data,
+    })
+  },
+  getRoleById(context, id) {
+    return request({
+      url: `/acl/role/${id}`,
+      method: 'get',
+    })
+  },
 }
 
 // mutations
