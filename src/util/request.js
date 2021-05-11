@@ -22,10 +22,10 @@ const err = (error) => {
       store.commit('SHOW_SNACKBAR', { text: message, color: 'error' })
       break
     case 401:
-      store.commit('SHOW_SNACKBAR', { text: 'Unauthenticated', color: 'error' })
+      store.commit('SHOW_SNACKBAR', { text: data.message, color: 'error' })
       break
     case 403:
-      store.commit('SHOW_SNACKBAR', { text: message, color: 'error' })
+      store.commit('SHOW_SNACKBAR', { text: data.message, color: 'error' })
       break
     case 500:
       store.commit('SHOW_SNACKBAR', { text: 'server error', color: 'error' })

@@ -72,6 +72,8 @@ const actions = {
       return resp
     })
   },
+
+  //role
   fetchRole(context, query) {
     return request({
       url: `/acl/role/`,
@@ -96,6 +98,35 @@ const actions = {
   getRoleById(context, id) {
     return request({
       url: `/acl/role/${id}`,
+      method: 'get',
+    })
+  },
+
+  //permission
+  fetchPermission(context, query) {
+    return request({
+      url: `/acl/permission/`,
+      method: 'get',
+      params: query,
+    })
+  },
+  createPermission(context, data) {
+    return request({
+      url: `/acl/permission/`,
+      method: 'post',
+      data: data,
+    })
+  },
+  updatePermission(context, { id, data }) {
+    return request({
+      url: `/acl/permission/${id}`,
+      method: 'put',
+      data: data,
+    })
+  },
+  getPermissionById(context, id) {
+    return request({
+      url: `/acl/permission/${id}`,
       method: 'get',
     })
   },

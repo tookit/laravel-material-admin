@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     formTitle() {
-      return this.item ? 'Edit Role - ' + this.item.name : 'Create Role'
+      return this.item ? 'Edit Permission - ' + this.item.name : 'Create Permission'
     },
     formItems() {
       return [
