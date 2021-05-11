@@ -87,6 +87,15 @@ export const protectedRoute = [
             },
           },
           {
+            path: '/cms/category/list',
+            name: 'cms.category.list',
+            component: () => import('@/views/cms/category/CategoryList.vue'),
+            meta: {
+              title: i18n.t('category'),
+              icon: 'mdi-newspaper-variant-multiple',
+            },
+          },
+          {
             path: '/cms/tag/list',
             name: 'cms.tag.list',
             component: () => import('@/views/cms/tag/TagList.vue'),
@@ -95,15 +104,7 @@ export const protectedRoute = [
               icon: 'mdi-tag',
             },
           },
-          {
-            path: '/cms/category/list',
-            name: 'cms.category.list',
-            component: () => import('@/views/cms/category/CategoryList.vue'),
-            meta: {
-              title: i18n.t('category'),
-              icon: 'mdi-tag',
-            },
-          },
+          ,
         ],
       },
 
@@ -113,7 +114,7 @@ export const protectedRoute = [
         name: 'acl.index',
         meta: {
           title: i18n.t('acl'),
-          icon: 'mdi-newspaper',
+          icon: 'mdi-shield-account-outline',
         },
         component: RouteWrapper,
         redirect: {
@@ -125,7 +126,7 @@ export const protectedRoute = [
             name: 'acl.user.list',
             component: () => import('@/views/acl/user/UserList.vue'),
             meta: {
-              title: i18n.t('user'),
+              title: i18n.tc('user'),
               icon: 'mdi-account',
             },
           },

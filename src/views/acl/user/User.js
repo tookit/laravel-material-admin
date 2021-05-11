@@ -21,6 +21,16 @@ export default {
           sortable: false,
         },
         {
+          text: 'gender',
+          value: 'gender',
+          sortable: true,
+        },
+        {
+          text: 'Flag',
+          value: 'flag_label',
+          sortable: true,
+        },
+        {
           text: 'Created',
           value: 'created_at',
           sortable: true,
@@ -46,7 +56,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getPostCategory']),
+    ...mapGetters(['getUserFlags', 'getUserGenders']),
     dataSource() {
       return (q) => {
         return this.$store.dispatch('fetchUser', q)
@@ -56,13 +66,20 @@ export default {
       return [
         {
           element: VAutocomplete,
-          transform: (val) => parseInt(val),
           cols: 4,
           props: {
-            name: 'category_id',
-            items: this.getPostCategory,
-            itemText: 'name',
-            itemValue: 'id',
+            name: 'flag',
+            items: this.getUserFlags,
+            itemText: 'text',
+            itemValue: 'text',
+          },
+        },
+        {
+          element: VAutocomplete,
+          cols: 4,
+          props: {
+            name: 'gender',
+            items: this.getUserGenders,
           },
         },
       ]

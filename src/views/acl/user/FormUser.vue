@@ -26,7 +26,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getPostCategory']),
+    ...mapGetters(['getUserFlags', 'getUserGenders']),
     formTitle() {
       return this.item ? 'Edit User - ' + this.item.name : 'Create User'
     },
@@ -49,7 +49,7 @@ export default {
             name: 'email',
             required: true,
             outlined: true,
-            rules: [(v) => !!v || 'Email is required',],
+            rules: [(v) => !!v || 'Email is required'],
           },
         },
         {
@@ -68,6 +68,26 @@ export default {
             name: 'lastname',
             required: true,
             outlined: true,
+          },
+        },
+        {
+          cols: 6,
+          element: VAutocomplete,
+          props: {
+            name: 'gender',
+            required: true,
+            outlined: true,
+            items: this.getUserGenders,
+          },
+        },
+        {
+          cols: 6,
+          element: VAutocomplete,
+          props: {
+            name: 'flag',
+            required: true,
+            outlined: true,
+            items: this.getUserFlags,
           },
         },
       ]
