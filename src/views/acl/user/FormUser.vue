@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { VTextField, VTextarea, VAutocomplete } from 'vuetify/lib'
+import { VTextField, VAutocomplete } from 'vuetify/lib'
 import { mapGetters } from 'vuex'
 export default {
   props: {
@@ -26,9 +26,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getUserFlags', 'getUserGenders']),
+    ...mapGetters(['getUserFlags', 'getUserGenders', 'getUserRoles']),
     formTitle() {
-      return this.item ? 'Edit User - ' + this.item.name : 'Create User'
+      return this.item ? 'Edit User - ' + this.item.username : 'Create User'
     },
     formItems() {
       return [
@@ -90,6 +90,19 @@ export default {
             items: this.getUserFlags,
           },
         },
+        {
+          cols: 12,
+          element: VAutocomplete,
+          props: {
+            name: 'role_ids',
+            required: true,
+            outlined: true,
+            items: this.getUserRoles,
+            itemText: 'name',
+            itemValue: 'id',
+            multiple: true,
+          },
+        },
       ]
     },
   },
@@ -97,9 +110,13 @@ export default {
     item: {
       handler(item) {
         this.formModel = Object.assign({}, item) || {}
+        this.formModel.role_ids = item.roles.length > 0 ? item.roles.map((item) => item.id) : []
       },
       immediate: true,
     },
+  },
+  created() {
+    this.$store.dispatch('fetchRole', { pageSize: -1 })
   },
   methods: {
     handleSubmit() {

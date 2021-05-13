@@ -29,12 +29,14 @@ const state = {
       value: 'other',
     },
   ],
+  roles: [],
 }
 
 // getters
 const getters = {
   getUserFlags: (state) => state.flags,
   getUserGenders: (state) => state.genders,
+  getUserRoles: (state) => state.roles,
 }
 
 // actions
@@ -79,6 +81,11 @@ const actions = {
       url: `/acl/role/`,
       method: 'get',
       params: query,
+    }).then((resp) => {
+      if (query.pageSize === -1) {
+        context.commit('SET_ROLES', resp.data)
+      }
+      return resp
     })
   },
   createRole(context, data) {
@@ -133,7 +140,16 @@ const actions = {
 }
 
 // mutations
-const mutations = {}
+const mutations = {
+  SET_ROLES(state, data) {
+    state.roles = data.map((role) => {
+      return {
+        id: role.id,
+        name: role.name,
+      }
+    })
+  },
+}
 
 export default {
   namespace: true,

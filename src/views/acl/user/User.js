@@ -1,4 +1,4 @@
-import { VAutocomplete, VChip } from 'vuetify/lib'
+import { VAutocomplete, VChip, VIcon } from 'vuetify/lib'
 import { mapGetters } from 'vuex'
 import FormUser from './FormUser'
 export default {
@@ -16,6 +16,44 @@ export default {
           sortable: false,
         },
         {
+          text: 'role',
+          value: 'roles',
+          sortable: false,
+          render: (item) => {
+            const { roles } = item
+            return roles.length > 0
+              ? roles.map((role) => {
+                  return this.$createElement(
+                    VChip,
+                    {
+                      class: 'mr-2',
+                      props: {
+                        small: true,
+                      },
+                      on: {
+                        click: () => {
+                          this.handleEditItem(item)
+                        },
+                      },
+                    },
+                    role.name
+                  )
+                })
+              : this.$createElement(
+                  VIcon,
+                  {
+                    on: {
+                      click: () => {
+                        this.handleEditItem(item)
+                      },
+                    },
+                  },
+                  'mdi-plus'
+                )
+          },
+          sortable: true,
+        },
+        {
           text: 'email',
           value: 'email',
           sortable: false,
@@ -29,6 +67,21 @@ export default {
           text: 'Flag',
           value: 'flag_label',
           sortable: true,
+          width: 120,
+          render: (item) => {
+            return this.$createElement(VAutocomplete, {
+              props: {
+                small: true,
+                items: this.getUserFlags,
+                value: item.flag,
+              },
+              on: {
+                change: (e) => {
+                  this.handleFieldChange('flag', e, item)
+                },
+              },
+            })
+          },
         },
         {
           text: 'Created',
@@ -131,6 +184,11 @@ export default {
           this.$refs.grid.fetchRecords()
         })
       }
+    },
+    handleFieldChange(field, value, item) {
+      const data = []
+      data[field] = value
+      this.$store.dispatch('updateUser', { id: item.id, data })
     },
   },
 }
