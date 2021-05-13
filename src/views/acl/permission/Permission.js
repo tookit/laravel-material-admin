@@ -15,6 +15,11 @@ export default {
           sortable: true,
         },
         {
+          text: 'Desc',
+          value: 'description',
+          sortable: true,
+        },
+        {
           text: 'Guard',
           value: 'guard_name',
           sortable: false,

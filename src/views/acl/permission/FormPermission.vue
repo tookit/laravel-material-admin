@@ -50,6 +50,15 @@ export default {
             rules: [(v) => !!v || 'Guard name is required'],
           },
         },
+        {
+          cols: 12,
+          element: VTextField,
+          props: {
+            name: 'description',
+            required: true,
+            outlined: true,
+          },
+        },
       ]
     },
   },
@@ -69,7 +78,7 @@ export default {
         const data = this.transformData(this.formModel)
         if (this.item && this.item.id) {
           return this.$store
-            .dispatch('updateRole', {
+            .dispatch('updatePermission', {
               id: this.item.id,
               data: data,
             })
@@ -83,7 +92,7 @@ export default {
             })
         } else {
           return this.$store
-            .dispatch('createRole', data)
+            .dispatch('createPermission', data)
             .then(({ data }) => {
               this.$emit('form:success', data)
               this.loading = false

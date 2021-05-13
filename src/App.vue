@@ -57,7 +57,14 @@ export default {
     }
     this.$root.$dialog = this.$refs.dialog
   },
-  created() {},
+  created() {
+    this.$on('AUTH_FAILED', (e) => {
+      this.$router.push({
+        path: '/auth/login',
+        query: { redirect: this.$route.path },
+      })
+    })
+  },
   methods: {
     openThemeSettings() {
       this.$vuetify.goTo(0)

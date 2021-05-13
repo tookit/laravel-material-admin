@@ -12,6 +12,7 @@ const router = new Router({
   linkActiveClass: 'active',
   routes: routes,
 })
+
 // router gards
 router.beforeEach((to, from, next) => {
   NProgress.start()
