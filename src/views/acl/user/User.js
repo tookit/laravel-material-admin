@@ -22,7 +22,7 @@ export default {
           render: (item) => {
             const { roles } = item
             return roles.length > 0
-              ? roles.map((role) => {
+              ? roles.slice(0, 2).map((role) => {
                   return this.$createElement(
                     VChip,
                     {

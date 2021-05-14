@@ -30,6 +30,7 @@ const state = {
     },
   ],
   roles: [],
+  users: [],
 }
 
 // getters
@@ -37,6 +38,7 @@ const getters = {
   getUserFlags: (state) => state.flags,
   getUserGenders: (state) => state.genders,
   getUserRoles: (state) => state.roles,
+  getUsers: (state) => state.users,
 }
 
 // actions
@@ -46,6 +48,11 @@ const actions = {
       url: `/acl/user/`,
       method: 'get',
       params: query,
+    }).then((resp) => {
+      if (query.pageSize === -1) {
+        context.commit('SET_USERS', resp.data)
+      }
+      return resp
     })
   },
   createUser(context, data) {
@@ -149,6 +156,14 @@ const mutations = {
       }
     })
   },
+  SET_USERS(state, data) {
+    state.users = data.map((item) => {
+      return {
+        id: item.id,
+        name: item.username,
+      }
+    })
+  },  
 }
 
 export default {

@@ -1,4 +1,5 @@
 import { mapGetters } from 'vuex'
+import { VAutocomplete, VChip, VIcon } from 'vuetify/lib'
 import FormRole from './FormRole'
 export default {
   data() {
@@ -12,6 +13,44 @@ export default {
         {
           text: 'name',
           value: 'name',
+          sortable: true,
+        },
+        {
+          text: 'users',
+          value: 'users',
+          sortable: false,
+          render: (item) => {
+            const { users } = item
+            return users.length > 0
+              ? users.slice(0, 2).map((user) => {
+                  return this.$createElement(
+                    VChip,
+                    {
+                      class: 'mr-2',
+                      props: {
+                        small: true,
+                      },
+                      on: {
+                        click: () => {
+                          this.handleEditItem(item)
+                        },
+                      },
+                    },
+                    user.username
+                  )
+                })
+              : this.$createElement(
+                  VIcon,
+                  {
+                    on: {
+                      click: () => {
+                        this.handleEditItem(item)
+                      },
+                    },
+                  },
+                  'mdi-plus'
+                )
+          },
           sortable: true,
         },
         {

@@ -13,7 +13,8 @@
 </template>
 
 <script>
-import { VTextField } from 'vuetify/lib'
+import { VTextField, VAutocomplete } from 'vuetify/lib'
+import { mapGetters } from 'vuex'
 export default {
   props: {
     item: Object,
@@ -25,6 +26,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['getUsers']),
     formTitle() {
       return this.item ? 'Edit Role - ' + this.item.name : 'Create Role'
     },
@@ -50,6 +52,21 @@ export default {
             rules: [(v) => !!v || 'Guard name is required'],
           },
         },
+        {
+          cols: 12,
+          element: VAutocomplete,
+          props: {
+            name: 'user_ids',
+            required: true,
+            outlined: true,
+            items: this.getUsers,
+            itemText: 'name',
+            itemValue: 'id',
+            multiple: true,
+            chips: true,
+            deletableChips: true,
+          },
+        },
       ]
     },
   },
@@ -57,9 +74,13 @@ export default {
     item: {
       handler(item) {
         this.formModel = Object.assign({}, item) || {}
+        this.formModel.user_ids = item.users.length > 0 ? item.users.map((item) => item.id) : []
       },
       immediate: true,
     },
+  },
+  created() {
+    this.$store.dispatch('fetchUser', { pageSize: -1 })
   },
   methods: {
     handleSubmit() {
