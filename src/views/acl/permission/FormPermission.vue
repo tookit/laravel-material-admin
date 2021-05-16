@@ -13,7 +13,8 @@
 </template>
 
 <script>
-import { VTextField } from 'vuetify/lib'
+import { VTextField, VAutocomplete } from 'vuetify/lib'
+import { mapGetters } from 'vuex'
 export default {
   props: {
     item: Object,
@@ -25,6 +26,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['getPermissions']),
     formTitle() {
       return this.item ? 'Edit Permission - ' + this.item.name : 'Create Permission'
     },
@@ -44,21 +46,12 @@ export default {
           cols: 6,
           element: VTextField,
           props: {
-            name: 'guard_name',
-            required: true,
-            outlined: true,
-            rules: [(v) => !!v || 'Guard name is required'],
-          },
-        },
-        {
-          cols: 12,
-          element: VTextField,
-          props: {
             name: 'description',
             required: true,
             outlined: true,
           },
         },
+
       ]
     },
   },
@@ -69,6 +62,9 @@ export default {
       },
       immediate: true,
     },
+  },
+  created() {
+    this.$store.dispatch('fetchPermission', { pageSize: -1 })
   },
   methods: {
     handleSubmit() {

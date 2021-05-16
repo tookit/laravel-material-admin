@@ -1,5 +1,6 @@
 import { mapGetters } from 'vuex'
 import FormPermission from './FormPermission'
+import { VAutocomplete, VChip, VIcon } from 'vuetify/lib'
 export default {
   data() {
     return {
@@ -24,6 +25,16 @@ export default {
           value: 'guard_name',
           sortable: false,
         },
+        {
+          text: 'Resource',
+          value: 'resource',
+          sortable: false,
+        },
+        {
+          text: 'Type',
+          value: 'type',
+          sortable: false,
+        },
 
         {
           text: 'Created',
@@ -41,24 +52,47 @@ export default {
           text: 'Edit Item',
           icon: 'mdi-pencil',
           click: this.handleEditItem,
+          enable: (item) => item.type !== 'system',
         },
         {
           text: 'Delete Item',
           icon: 'mdi-delete',
           click: this.handleDeleteItem,
+          enable: (item) => item.type !== 'system',
         },
       ],
     }
   },
   computed: {
-    ...mapGetters(['getUserFlags', 'getUserGenders']),
+    ...mapGetters(['getUserFlags', 'getUserGenders', 'getPermissionTypes', 'getPermissionResources']),
     dataSource() {
       return (q) => {
         return this.$store.dispatch('fetchPermission', q)
       }
     },
     filterItems() {
-      return []
+      return [
+        {
+          element: VAutocomplete,
+          cols: 4,
+          props: {
+            name: 'type',
+            items: this.getPermissionTypes,
+            itemText: 'text',
+            itemValue: 'text',
+          },
+        },
+        {
+          element: VAutocomplete,
+          cols: 4,
+          props: {
+            name: 'resource',
+            items: this.getPermissionResources,
+            itemText: 'text',
+            itemValue: 'value',
+          },
+        },
+      ]
     },
   },
   watch: {},
@@ -108,5 +142,8 @@ export default {
         })
       }
     },
+  },
+  created() {
+    this.$store.dispatch('fetchPermissionResources')
   },
 }

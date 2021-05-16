@@ -26,7 +26,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getUsers']),
+    ...mapGetters(['getUsers', 'getPermissions']),
     formTitle() {
       return this.item ? 'Edit Role - ' + this.item.name : 'Create Role'
     },
@@ -67,6 +67,22 @@ export default {
             deletableChips: true,
           },
         },
+        {
+          cols: 12,
+          element: VAutocomplete,
+          props: {
+            name: 'permission_ids',
+            label: 'Permission Set',
+            required: true,
+            outlined: true,
+            items: this.getPermissions,
+            itemText: 'name',
+            itemValue: 'id',
+            multiple: true,
+            chips: true,
+            deletableChips: true,
+          },
+        },
       ]
     },
   },
@@ -81,6 +97,7 @@ export default {
   },
   created() {
     this.$store.dispatch('fetchUser', { pageSize: -1 })
+    this.$store.dispatch('fetchPermission', { pageSize: -1 })
   },
   methods: {
     handleSubmit() {

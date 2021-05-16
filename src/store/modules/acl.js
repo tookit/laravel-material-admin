@@ -31,6 +31,18 @@ const state = {
   ],
   roles: [],
   users: [],
+  permissions: [],
+  resources: [],
+  permissionTypes: [
+    {
+      text: 'system',
+      value: 'system',
+    },
+    {
+      text: 'custom',
+      value: 'custom',
+    },
+  ],
 }
 
 // getters
@@ -39,6 +51,9 @@ const getters = {
   getUserGenders: (state) => state.genders,
   getUserRoles: (state) => state.roles,
   getUsers: (state) => state.users,
+  getPermissions: (state) => state.permissions,
+  getPermissionTypes: (state) => state.permissionTypes,
+  getPermissionResources: (state) => state.resources,
 }
 
 // actions
@@ -122,6 +137,21 @@ const actions = {
       url: `/acl/permission/`,
       method: 'get',
       params: query,
+    }).then((resp) => {
+      if (query.pageSize === -1) {
+        context.commit('SET_PERMISSIONS', resp.data)
+      }
+      return resp
+    })
+  },
+  fetchPermissionResources(context, query) {
+    return request({
+      url: `/acl/permission/resource`,
+      method: 'get',
+      params: query,
+    }).then((resp) => {
+      context.commit('SET_PERMISSION_RESOUCES', resp.data)
+      return resp
     })
   },
   createPermission(context, data) {
@@ -163,7 +193,24 @@ const mutations = {
         name: item.username,
       }
     })
-  },  
+  },
+  SET_PERMISSIONS(state, data) {
+    state.permissions = data.map((item) => {
+      return {
+        id: item.id,
+        name: item.name,
+        type: item.type,
+      }
+    })
+  },
+  SET_PERMISSION_RESOUCES(state, data) {
+    state.resources = data.map((item) => {
+      return {
+        text: item,
+        value: item,
+      }
+    })
+  },
 }
 
 export default {
