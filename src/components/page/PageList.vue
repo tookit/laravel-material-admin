@@ -59,6 +59,28 @@
       @click:row="handleRowClick"
       @sortable:onUpdate="handleOnSort"
     >
+      <template #top>
+        <v-toolbar v-show="showBatchAction" flat>
+          <v-menu>
+            <template #activator="{ on: menu }">
+              <v-tooltip bottom>
+                <template #activator="{ on: tooltip }">
+                  <v-btn v-on="onTooltip({ ...tooltip, ...menu })"> Batch Action </v-btn>
+                </template>
+                <span>Batch Action</span>
+              </v-tooltip>
+            </template>
+            <v-list class="pa-0" dense>
+              <v-list-item v-for="act in batchActions" :key="act.text" @click="handleBatchAction(act, item)">
+                <v-list-item-icon class="mr-2">
+                  <v-icon small>{{ act.icon }}</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>{{ act.text }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </v-toolbar>
+      </template>
       <template #[`item.action`]="{ item }">
         <v-menu>
           <template #activator="{ on: menu }">
@@ -125,6 +147,7 @@ export default {
   },
   data() {
     return {
+      batchActions: [],
       //filter section
       search: '',
       filters: {},
@@ -143,7 +166,11 @@ export default {
       items: [],
     }
   },
-  computed: {},
+  computed: {
+    showBatchAction() {
+      return this.batchActions.length > 0 && this.selectedItems.length > 0
+    },
+  },
   watch: {
     '$route.query': {
       handler(query) {
@@ -266,6 +293,9 @@ export default {
       })
     },
     handleAction(act, item) {
+      act.click.apply(this, [item])
+    },
+    handleBatchAction(act, item) {
       act.click.apply(this, [item])
     },
     // default action
