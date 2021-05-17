@@ -63,15 +63,10 @@
         <v-toolbar v-show="showBatchAction" flat>
           <v-menu>
             <template #activator="{ on: menu }">
-              <v-tooltip bottom>
-                <template #activator="{ on: tooltip }">
-                  <v-btn v-on="onTooltip({ ...tooltip, ...menu })"> Batch Action </v-btn>
-                </template>
-                <span>Batch Action</span>
-              </v-tooltip>
+              <v-btn v-on="{ ...menu }"> Batch Action </v-btn>
             </template>
             <v-list class="pa-0" dense>
-              <v-list-item v-for="act in batchActions" :key="act.text" @click="handleBatchAction(act, item)">
+              <v-list-item v-for="act in batchActions" :key="act.text" @click="handleBatchAction(act, selectedItems)">
                 <v-list-item-icon class="mr-2">
                   <v-icon small>{{ act.icon }}</v-icon>
                 </v-list-item-icon>
@@ -133,6 +128,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    batchActions: {
+      type: Array,
+      default: () => [],
+    },
     filterItems: {
       type: Array,
       default: () => [],
@@ -147,7 +146,6 @@ export default {
   },
   data() {
     return {
-      batchActions: [],
       //filter section
       search: '',
       filters: {},
@@ -168,6 +166,7 @@ export default {
   },
   computed: {
     showBatchAction() {
+      console.log(this.batchActions.length)
       return this.batchActions.length > 0 && this.selectedItems.length > 0
     },
   },
@@ -295,8 +294,8 @@ export default {
     handleAction(act, item) {
       act.click.apply(this, [item])
     },
-    handleBatchAction(act, item) {
-      act.click.apply(this, [item])
+    handleBatchAction(act, items) {
+      act.click.apply(this, [items])
     },
     // default action
     handleShowAct(act, item) {

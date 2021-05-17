@@ -7,6 +7,7 @@
           :headers="headers"
           :filter-items="filterItems"
           :actions="actions"
+          :batch-actions="batchActions"
           :data-source="dataSource"
           search-field="name"
           @create="handleCreateItem"

@@ -1,6 +1,6 @@
 import { mapGetters } from 'vuex'
 import FormPermission from './FormPermission'
-import { VAutocomplete, VChip, VIcon } from 'vuetify/lib'
+import { VAutocomplete } from 'vuetify/lib'
 export default {
   data() {
     return {
@@ -61,6 +61,7 @@ export default {
           enable: (item) => item.type !== 'system',
         },
       ],
+      batchActions: [],
     }
   },
   computed: {

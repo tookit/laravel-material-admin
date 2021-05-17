@@ -72,6 +72,13 @@ export default {
           click: this.handleDeleteItem,
         },
       ],
+      batchActions: [
+        {
+          text: 'Delete Selected',
+          icon: 'mdi-delete',
+          click: this.handleDeleteItems,
+        },
+      ],
     }
   },
   computed: {
@@ -140,6 +147,14 @@ export default {
     handleDeleteItem(item) {
       if (window.confirm('Are you sure to delete this ?')) {
         this.$store.dispatch('deletePost', item.id).then(() => {
+          this.$refs.grid.fetchRecords()
+        })
+      }
+    },
+    handleDeleteItems(items) {
+      if (window.confirm('Are you sure to delete selected Items ?')) {
+        const ids = items.map((item) => item.id)
+        this.$store.dispatch('deletePost', ids).then(() => {
           this.$refs.grid.fetchRecords()
         })
       }
