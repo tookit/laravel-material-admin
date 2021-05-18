@@ -23,7 +23,6 @@ const err = (error) => {
       break
     case 401:
       window._VMA.$emit('AUTH_FAILED')
-      // store.commit('SHOW_SNACKBAR', { text: data.message, color: 'error' })
       break
     case 403:
       store.commit('SHOW_SNACKBAR', { text: data.message, color: 'error' })

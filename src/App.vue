@@ -58,7 +58,8 @@ export default {
     this.$root.$dialog = this.$refs.dialog
   },
   created() {
-    this.$on('AUTH_FAILED', (e) => {
+    this.$on('AUTH_FAILED', () => {
+      this.$store.commit('SHOW_SNACKBAR', { color: 'error', text: 'Auth Failed' })
       this.$router.push({
         path: '/auth/login',
         query: { redirect: this.$route.path },

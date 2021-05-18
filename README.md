@@ -2,7 +2,32 @@
 
 The Admin UI dashboard for laravel-material-admin.
 
-
+## Project Structure
+``` bash
+├── src
+│   ├── api
+│   ├── components
+│   ├── mixins
+│   ├── views
+│   ├── router
+│   ├── store
+│   ├── util
+│   ├── theme
+│   │   ├── default.sass
+│   └── App.vue
+│   └── event.js
+│   └── main.js
+├── dist
+├── release
+├── static (or asset)
+├── node_modules
+├── test
+├── README.md
+├── package.json
+├── vue.config.js
+├── index.html
+└── .gitignore
+```
 
 ## Project setup
 ```
