@@ -19,7 +19,7 @@
 
 <script>
 import PageList from '@/components/page/PageList'
-import Mixin from './PostMixin'
+import Mixin from './PostList'
 export default {
   components: {
     PageList,

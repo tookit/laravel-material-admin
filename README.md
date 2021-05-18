@@ -1,3 +1,42 @@
 # Laravel Material Admin
 
-The admin dashboard for laravel
+The Admin UI dashboard for laravel-material-admin.
+
+
+
+## Project setup
+```
+yarn install
+```
+
+### Compiles and hot-reloads for development
+```
+yarn run serve
+```
+
+### Compiles and minifies for production
+```
+yarn run build
+```
+
+### Run your tests
+```
+yarn run test
+```
+
+### Lints and fixes files
+```
+yarn run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+### Reference
+
+* [Vuetifyjs](https://vuetifyjs.com/)
+* [Vue](https://vuejs.org/index.html/)
+* [ICON](https://materialdesignicons.com/)
+* [ECharts](http://echarts.baidu.com/option.html)
+* [SASS](http://sass-lang.com/)
