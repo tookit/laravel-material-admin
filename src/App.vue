@@ -5,6 +5,9 @@
     <v-btn small fab dark fixed top="top" right="right" class="setting-fab" color="red" @click="openThemeSettings">
       <v-icon>mdi-silverware-variant</v-icon>
     </v-btn>
+    <!-- <v-btn small fab dark fixed top="top" right="right" class="chat-fab" color="primary">
+      <v-icon>mdi-bug</v-icon>
+    </v-btn> -->
     <!-- setting drawer -->
     <v-navigation-drawer v-model="rightDrawer" class="setting-drawer" temporary right hide-overlay fixed>
       <template v-if="showSetting">
