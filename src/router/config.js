@@ -87,6 +87,17 @@ export const protectedRoute = [
             },
           },
           {
+            path: '/cms/post/edit/:id',
+            name: 'cms.post.list',
+            props: true,
+            component: () => import('@/views/cms/post/PostItem.vue'),
+            meta: {
+              title: i18n.t('post'),
+              icon: 'mdi-post',
+              hidden: true,
+            },
+          },          
+          {
             path: '/cms/category/list',
             name: 'cms.category.list',
             component: () => import('@/views/cms/category/CategoryList.vue'),

@@ -20,10 +20,11 @@ import { mapGetters } from 'vuex'
 export default {
   props: {
     item: Object,
+    loading: Boolean,
   },
   data() {
     return {
-      loading: false,
+      submitting: false,
       formModel: {},
     }
   },
@@ -94,11 +95,14 @@ export default {
       immediate: true,
     },
   },
+  created() {
+    this.$store.dispatch('fetchPostCategory', { pageSize: -1 })
+  },
   methods: {
     handleSubmit() {
       const form = this.$refs.builder.$refs.form
       if (form.validate()) {
-        this.loading = true
+        this.submitting = true
         const data = this.transformData(this.formModel)
         if (this.item && this.item.id) {
           return this.$store
@@ -108,22 +112,22 @@ export default {
             })
             .then(({ data }) => {
               this.$emit('form:success', data)
-              this.loading = false
+              this.submitting = false
             })
             .catch(() => {
               this.$emit('form:failed')
-              this.loading = false
+              this.submitting = false
             })
         } else {
           return this.$store
             .dispatch('createPost', data)
             .then(({ data }) => {
               this.$emit('form:success', data)
-              this.loading = false
+              this.submitting = false
             })
             .catch(() => {
               this.$emit('form:failed')
-              this.loading = false
+              this.submitting = false
             })
         }
       }

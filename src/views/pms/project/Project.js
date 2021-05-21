@@ -1,3 +1,5 @@
+import { VAutocomplete } from 'vuetify/lib'
+import { mapGetters } from 'vuex'
 import FormProject from './FormProject'
 export default {
   data() {
@@ -10,17 +12,29 @@ export default {
         {
           text: 'name',
           value: 'name',
-          width: 250,
         },
         {
           text: 'owner',
           value: 'owner',
-          width: 250,
         },
         {
           text: 'status',
           value: 'status',
-          width: 250,
+          width: 120,
+          render: (item) => {
+            return this.$createElement(VAutocomplete, {
+              props: {
+                items: this.getProjectStatus,
+                value: item.status,
+              },
+              on: {
+                change: (val) => {
+                  this.handleUpdateField('status', val, item)
+                },
+              },
+            })
+          },
+          sortable: true,
         },
         {
           text: 'Created',
@@ -60,6 +74,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['getProjectStatus']),
     dataSource() {
       return (q) => {
         return this.$store.dispatch('fetchProject', q)
@@ -115,6 +130,11 @@ export default {
           this.$refs.grid.fetchRecords()
         })
       }
+    },
+    handleUpdateField(field, val, item) {
+      const data = {}
+      data[field] = val
+      this.$store.dispatch('updateProject', { id: item.id, data })
     },
   },
 }

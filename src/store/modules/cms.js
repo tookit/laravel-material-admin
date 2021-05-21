@@ -52,6 +52,12 @@ const actions = {
     })
   },
 
+  getPostById(context, id) {
+    return request({
+      url: `cms/post/${id}`,
+      method: 'get',
+    })
+  },
   fetchTag(context, query) {
     return request({
       url: `cms/tag`,
