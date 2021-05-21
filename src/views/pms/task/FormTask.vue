@@ -14,6 +14,7 @@
 
 <script>
 import { VTextField, VTextarea, VAutocomplete } from 'vuetify/lib'
+import { mapGetters } from 'vuex'
 export default {
   props: {
     item: Object,
@@ -25,6 +26,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['getProjectList']),
     formTitle() {
       return this.item ? 'Edit Project Task - ' + this.item.name : 'Create Project Task'
     },
@@ -37,6 +39,7 @@ export default {
             name: 'project_id',
             required: true,
             outlined: true,
+            items: this.getProjectList,
             rules: [(v) => !!v || 'Project is required'],
           },
         },
@@ -85,6 +88,9 @@ export default {
       },
       immediate: true,
     },
+  },
+  created() {
+    this.$store.dispatch('fetchProject', { pageSize: -1 })
   },
   methods: {
     handleSubmit() {
