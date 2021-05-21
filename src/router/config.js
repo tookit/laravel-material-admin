@@ -145,7 +145,7 @@ export const protectedRoute = [
             component: () => import('@/views/acl/permission/PermissionList.vue'),
             meta: {
               title: i18n.t('permission'),
-              icon: 'mdi-account-group',
+              icon: 'mdi-key',
             },
           },
         ],

@@ -16,6 +16,7 @@ const router = new Router({
 // router gards
 router.beforeEach((to, from, next) => {
   NProgress.start()
+  // validateToken
   const token = store.getters.getAccessToken
   if (to.name !== 'login') {
     if (token) {

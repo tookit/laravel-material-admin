@@ -1,4 +1,4 @@
-import FormTag from './FormTag'
+import FormTask from './FormTask'
 export default {
   data() {
     return {
@@ -35,6 +35,18 @@ export default {
           click: this.handleDeleteItem,
         },
       ],
+      batchActions: [
+        {
+          text: 'Edit Item',
+          icon: 'mdi-pencil',
+          click: this.handleEditItem,
+        },
+        {
+          text: 'Delete Item',
+          icon: 'mdi-delete',
+          click: this.handleDeleteItem,
+        },
+      ],
     }
   },
   computed: {
@@ -52,7 +64,7 @@ export default {
     handleCreateItem() {
       const dialog = this.$root.$dialog
       dialog.loadComponent({
-        component: FormTag,
+        component: FormTask,
         data: {
           item: null,
         },
@@ -71,7 +83,7 @@ export default {
     handleEditItem(item) {
       const dialog = this.$root.$dialog
       dialog.loadComponent({
-        component: FormTag,
+        component: FormTask,
         data: {
           item: item,
         },

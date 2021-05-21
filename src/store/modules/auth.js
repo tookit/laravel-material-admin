@@ -10,7 +10,8 @@ const randomColor = () => {
 
 const state = {
   access_token: null,
-  expires_in: 3600,
+  expires_in: 3600, // minutes
+  expire_at: 0,
   token_type: 'bearer',
   username: 'admin',
   avatar: null,
@@ -21,8 +22,11 @@ const getters = {
   getAccessToken: (state) => {
     return state.access_token
   },
+  getExpire: (state) => {
+    let milliseconds = new Date().getTime()
+    return milliseconds + state.expires_in * 60 * 1000
+  },
   getAvatar: (state) => state.avatar,
-
   getUsername: (state) => state.username,
   getUserStatus: (state) => state.status,
 }
