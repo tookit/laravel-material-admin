@@ -8,31 +8,33 @@ const service = axios.create({
 })
 
 const err = (error) => {
-  const { status, data } = error.response
-  const { errors } = data
-  let message = []
-  for (let field in errors) {
-    message.push(errors[field])
+  if (error.response) {
+    const { status, data } = error.response
+    const { errors } = data
+    let message = []
+    for (let field in errors) {
+      message.push(errors[field])
+    }
+    switch (status) {
+      case 400:
+        store.commit('SHOW_SNACKBAR', { text: data.message, color: 'error' })
+        break
+      case 422:
+        store.commit('SHOW_SNACKBAR', { text: message, color: 'error' })
+        break
+      case 401:
+        window._VMA.$emit('AUTH_FAILED')
+        break
+      case 403:
+        store.commit('SHOW_SNACKBAR', { text: data.message, color: 'error' })
+        break
+      default:
+        break
+    }
+  } else {
+    store.commit('SHOW_SNACKBAR', { text: 'server error', color: 'error' })
   }
-  switch (status) {
-    case 400:
-      store.commit('SHOW_SNACKBAR', { text: data.message, color: 'error' })
-      break
-    case 422:
-      store.commit('SHOW_SNACKBAR', { text: message, color: 'error' })
-      break
-    case 401:
-      window._VMA.$emit('AUTH_FAILED')
-      break
-    case 403:
-      store.commit('SHOW_SNACKBAR', { text: data.message, color: 'error' })
-      break
-    case 500:
-      store.commit('SHOW_SNACKBAR', { text: 'server error', color: 'error' })
-      break
-    default:
-      break
-  }
+
   return Promise.reject(error)
 }
 

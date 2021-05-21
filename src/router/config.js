@@ -151,6 +151,31 @@ export const protectedRoute = [
         ],
       },
 
+      //task
+      {
+        path: '/task',
+        name: 'task.index',
+        meta: {
+          title: i18n.t('task'),
+          icon: 'mdi-shield-account-outline',
+        },
+        component: RouteWrapper,
+        redirect: {
+          path: '/acl/task/list',
+        },
+        children: [
+          {
+            path: '/acl/task/list',
+            name: 'acl.task.list',
+            component: () => import('@/views/task/TaskList.vue'),
+            meta: {
+              title: i18n.tc('task'),
+              icon: 'mdi-account',
+            },
+          },
+        ],
+      },
+
       {
         path: '/403',
         name: 'Forbidden',

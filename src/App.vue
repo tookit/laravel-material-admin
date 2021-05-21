@@ -5,7 +5,7 @@
     <v-btn small fab dark fixed top="top" right="right" class="setting-fab" color="red" @click="openThemeSettings">
       <v-icon>mdi-silverware-variant</v-icon>
     </v-btn>
-    <!-- <v-btn small fab dark fixed top="top" right="right" class="chat-fab" color="primary">
+    <!-- <v-btn small fab dark fixed top="top" right="right" class="chat-fab" color="primary" @click="showDebugPanel">
       <v-icon>mdi-bug</v-icon>
     </v-btn> -->
     <!-- setting drawer -->

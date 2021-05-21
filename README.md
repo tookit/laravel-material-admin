@@ -63,5 +63,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 * [Vuetifyjs](https://vuetifyjs.com/)
 * [Vue](https://vuejs.org/index.html/)
 * [ICON](https://materialdesignicons.com/)
-* [ECharts](http://echarts.baidu.com/option.html)
 * [SASS](http://sass-lang.com/)
