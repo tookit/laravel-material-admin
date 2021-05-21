@@ -8,8 +8,22 @@ export default {
           value: 'id',
         },
         {
+          text: 'Project',
+          value: 'project.name',
+        },
+        {
           text: 'name',
           value: 'name',
+          width: 250,
+        },
+        {
+          text: 'owner',
+          value: 'owner',
+          width: 250,
+        },
+        {
+          text: 'status',
+          value: 'status',
           width: 250,
         },
         {

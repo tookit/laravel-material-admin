@@ -153,24 +153,33 @@ export const protectedRoute = [
 
       //task
       {
-        path: '/task',
+        path: '/pms',
         name: 'task.index',
         meta: {
           title: i18n.t('task'),
-          icon: 'mdi-shield-account-outline',
+          icon: 'mdi-view-list',
         },
         component: RouteWrapper,
         redirect: {
-          path: '/acl/task/list',
+          path: '/pms/task/list',
         },
         children: [
           {
-            path: '/acl/task/list',
-            name: 'acl.task.list',
-            component: () => import('@/views/task/TaskList.vue'),
+            path: '/pms/task/list',
+            name: 'pms.task.list',
+            component: () => import('@/views/pms/task/TaskList.vue'),
             meta: {
               title: i18n.tc('task'),
-              icon: 'mdi-account',
+              icon: 'mdi-format-list-checks',
+            },
+          },
+          {
+            path: '/pms/project/list',
+            name: 'pms.project.list',
+            component: () => import('@/views/pms/project/ProjectList.vue'),
+            meta: {
+              title: i18n.tc('project'),
+              icon: 'mdi-view-list',
             },
           },
         ],

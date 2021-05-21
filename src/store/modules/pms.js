@@ -31,6 +31,31 @@ const actions = {
       return resp
     })
   },
+  createProject(context, data) {
+    return request({
+      url: `project`,
+      method: 'post',
+      data: data,
+    }).then((resp) => {
+      return resp
+    })
+  },
+  updateProject(context, { id, data }) {
+    return request({
+      url: `project/${id}`,
+      method: 'put',
+      data: data,
+    }).then((resp) => {
+      return resp
+    })
+  },
+  deleteProject(context, id) {
+    return request({
+      url: `project/${id}`,
+      method: 'delete',
+    })
+  },
+
   fetchTask(context, query) {
     return request({
       url: `task`,

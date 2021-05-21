@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { VTextField, VTextarea } from 'vuetify/lib'
+import { VTextField, VTextarea, VAutocomplete } from 'vuetify/lib'
 export default {
   props: {
     item: Object,
@@ -26,10 +26,20 @@ export default {
   },
   computed: {
     formTitle() {
-      return this.item ? 'Edit Post Category - ' + this.item.name : 'Create Post Category'
+      return this.item ? 'Edit Project Task - ' + this.item.name : 'Create Project Task'
     },
     formItems() {
       return [
+        {
+          cols: 12,
+          element: VAutocomplete,
+          props: {
+            name: 'project_id',
+            required: true,
+            outlined: true,
+            rules: [(v) => !!v || 'Project is required'],
+          },
+        },
         {
           cols: 12,
           element: VTextField,
@@ -46,6 +56,22 @@ export default {
           element: VTextarea,
           props: {
             name: 'description',
+            outlined: true,
+          },
+        },
+        {
+          cols: 6,
+          element: VAutocomplete,
+          props: {
+            name: 'owner',
+            outlined: true,
+          },
+        },
+        {
+          cols: 6,
+          element: VAutocomplete,
+          props: {
+            name: 'status',
             outlined: true,
           },
         },
@@ -68,7 +94,7 @@ export default {
         const data = this.transformData(this.formModel)
         if (this.item && this.item.id) {
           return this.$store
-            .dispatch('updatePostCategory', {
+            .dispatch('updateTask', {
               id: this.item.id,
               data: data,
             })
@@ -82,7 +108,7 @@ export default {
             })
         } else {
           return this.$store
-            .dispatch('createPostCategory', data)
+            .dispatch('createTask', data)
             .then(({ data }) => {
               this.$emit('form:success', data)
               this.loading = false
