@@ -14,6 +14,7 @@
 
 <script>
 import { VTextField, VTextarea, VAutocomplete } from 'vuetify/lib'
+import { mapGetters } from 'vuex'
 export default {
   props: {
     item: Object,
@@ -25,6 +26,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['getProjectStatus']),
     formTitle() {
       return this.item ? 'Edit Project - ' + this.item.name : 'Create Project'
     },
@@ -61,6 +63,7 @@ export default {
           element: VAutocomplete,
           props: {
             name: 'status',
+            items: this.getProjectStatus,
             outlined: true,
           },
         },
@@ -74,6 +77,9 @@ export default {
       },
       immediate: true,
     },
+  },
+  created() {
+    this.$store.dispatch('fetchProjectStatus')
   },
   methods: {
     handleSubmit() {

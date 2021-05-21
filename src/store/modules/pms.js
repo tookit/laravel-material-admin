@@ -1,6 +1,9 @@
 import request from '@/util/request'
 
-const state = {}
+const state = {
+  projectStatus: [],
+  taskStatus: [],
+}
 
 // getters
 const getters = {
@@ -12,6 +15,7 @@ const getters = {
       }
     })
   },
+  getProjectStatus: (state) => state.projectStatus,
   getTaskStatus: (state) => state.taskStatus,
   getTaskStatusByValue: (state) => (value) => {
     const find = state.taskStatus.find(item.value === value)
@@ -23,7 +27,7 @@ const getters = {
 const actions = {
   fetchProject(context, query) {
     return request({
-      url: `project`,
+      url: `pms/project`,
       method: 'get',
       params: query,
     }).then((resp) => {
@@ -31,9 +35,18 @@ const actions = {
       return resp
     })
   },
+  fetchProjectStatus(context) {
+    return request({
+      url: `pms/project/status`,
+      method: 'get',
+    }).then((resp) => {
+      context.commit('SET_PROJECT_STATUS', resp.data)
+      return resp
+    })
+  },
   createProject(context, data) {
     return request({
-      url: `project`,
+      url: `pms/project`,
       method: 'post',
       data: data,
     }).then((resp) => {
@@ -42,7 +55,7 @@ const actions = {
   },
   updateProject(context, { id, data }) {
     return request({
-      url: `project/${id}`,
+      url: `pms/project/${id}`,
       method: 'put',
       data: data,
     }).then((resp) => {
@@ -51,7 +64,7 @@ const actions = {
   },
   deleteProject(context, id) {
     return request({
-      url: `project/${id}`,
+      url: `pms/project/${id}`,
       method: 'delete',
     })
   },
@@ -112,6 +125,14 @@ const actions = {
 const mutations = {
   SET_PROJECT(state, data) {
     state.projects = data
+  },
+  SET_PROJECT_STATUS(state, data) {
+    state.projectStatus = data.map((text, value) => {
+      return {
+        text: text,
+        value: value,
+      }
+    })
   },
 }
 

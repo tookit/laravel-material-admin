@@ -8,10 +8,6 @@ export default {
           value: 'id',
         },
         {
-          text: 'Project',
-          value: 'project.name',
-        },
-        {
           text: 'name',
           value: 'name',
           width: 250,
@@ -66,7 +62,7 @@ export default {
   computed: {
     dataSource() {
       return (q) => {
-        return this.$store.dispatch('fetchTask', q)
+        return this.$store.dispatch('fetchProject', q)
       }
     },
     filterItems() {
