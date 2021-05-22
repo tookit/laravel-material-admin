@@ -96,7 +96,7 @@ export const protectedRoute = [
               icon: 'mdi-post',
               hidden: true,
             },
-          },          
+          },
           {
             path: '/cms/category/list',
             name: 'cms.category.list',
