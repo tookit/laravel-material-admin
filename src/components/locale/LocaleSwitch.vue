@@ -26,7 +26,7 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      locale: this.$i18n.locale,
+      locale: this._i18n.locale,
     }
   },
   computed: {
@@ -37,9 +37,8 @@ export default {
       return this.$t(locale)
     },
     handleChangeLocale(locale) {
-      this.$vuetify.lang.current = locale.value
+      this._i18n.locale = locale.value
       this.$store.commit('SET_LOCALE', locale.value)
-      this.$i18n.locale = locale.value
     },
   },
 }

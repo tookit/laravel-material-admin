@@ -8,7 +8,7 @@ Vue.use(Vuetify)
 export default new Vuetify({
   lang: {
     t: (key, ...params) => i18n.t(key, params),
-    current: store.getters.getLocale,
+    current: 'en',
   },
   theme: {
     options: {

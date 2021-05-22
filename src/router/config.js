@@ -1,5 +1,4 @@
 import { LayoutAuth, LayoutDefault, RouteWrapper } from '@/components/layouts'
-import i18n from '../plugins/i18n'
 
 export const publicRoute = [
   {
@@ -10,7 +9,7 @@ export const publicRoute = [
     path: '/auth',
     component: LayoutAuth,
     meta: {
-      title: i18n.t('login'),
+      title: 'login',
     },
     redirect: '/auth/login',
     hidden: true,
@@ -19,7 +18,7 @@ export const publicRoute = [
         path: 'login',
         name: 'login',
         meta: {
-          title: i18n.t('login'),
+          title: 'login',
         },
         component: () => import('@/views/auth/Login.vue'),
       },
@@ -30,7 +29,7 @@ export const publicRoute = [
     path: '/404',
     name: '404',
     meta: {
-      title: i18n.t('not found'),
+      title: 'not found',
     },
     component: () => import('@/views/error/NotFound.vue'),
   },
@@ -39,7 +38,7 @@ export const publicRoute = [
     path: '/500',
     name: '500',
     meta: {
-      title: i18n.t('server error'),
+      title: 'server error',
     },
     component: () => import('@/views/error/Error.vue'),
   },
@@ -50,7 +49,7 @@ export const protectedRoute = [
     path: '/',
     component: LayoutDefault,
     meta: {
-      title: i18n.t('home'),
+      title: 'home',
       icon: '',
     },
     redirect: '/dashboard',
@@ -59,7 +58,7 @@ export const protectedRoute = [
         path: '/dashboard',
         name: 'dashboard',
         meta: {
-          title: i18n.t('dashboard'),
+          title: 'dashboard',
           icon: 'mdi-view-dashboard',
         },
         component: () => import('@/views/Dashboard.vue'),
@@ -69,7 +68,7 @@ export const protectedRoute = [
         path: '/cms',
         name: 'cms.index',
         meta: {
-          title: i18n.t('cms'),
+          title: 'cms',
           icon: 'mdi-newspaper',
         },
         component: RouteWrapper,
@@ -82,7 +81,7 @@ export const protectedRoute = [
             name: 'cms.post.list',
             component: () => import('@/views/cms/post/PostList.vue'),
             meta: {
-              title: i18n.t('post'),
+              title: 'post',
               icon: 'mdi-post',
             },
           },
@@ -92,7 +91,7 @@ export const protectedRoute = [
             props: true,
             component: () => import('@/views/cms/post/PostItem.vue'),
             meta: {
-              title: i18n.t('post'),
+              title: 'Post Edit',
               icon: 'mdi-post',
               hidden: true,
             },
@@ -102,7 +101,7 @@ export const protectedRoute = [
             name: 'cms.category.list',
             component: () => import('@/views/cms/category/CategoryList.vue'),
             meta: {
-              title: i18n.t('category'),
+              title: 'category',
               icon: 'mdi-newspaper-variant-multiple',
             },
           },
@@ -111,7 +110,7 @@ export const protectedRoute = [
             name: 'cms.tag.list',
             component: () => import('@/views/cms/tag/TagList.vue'),
             meta: {
-              title: i18n.t('tag'),
+              title: 'tag',
               icon: 'mdi-tag',
             },
           },
@@ -124,7 +123,7 @@ export const protectedRoute = [
         path: '/acl',
         name: 'acl.index',
         meta: {
-          title: i18n.t('acl'),
+          title: 'acl',
           icon: 'mdi-shield-account-outline',
         },
         component: RouteWrapper,
@@ -137,7 +136,7 @@ export const protectedRoute = [
             name: 'acl.user.list',
             component: () => import('@/views/acl/user/UserList.vue'),
             meta: {
-              title: i18n.tc('user'),
+              title: 'user',
               icon: 'mdi-account',
             },
           },
@@ -146,7 +145,7 @@ export const protectedRoute = [
             name: 'acl.role.list',
             component: () => import('@/views/acl/role/RoleList.vue'),
             meta: {
-              title: i18n.t('role'),
+              title: 'role',
               icon: 'mdi-account-group',
             },
           },
@@ -155,7 +154,7 @@ export const protectedRoute = [
             name: 'acl.permission.list',
             component: () => import('@/views/acl/permission/PermissionList.vue'),
             meta: {
-              title: i18n.t('permission'),
+              title: 'permission',
               icon: 'mdi-key',
             },
           },
@@ -167,7 +166,7 @@ export const protectedRoute = [
         path: '/pms',
         name: 'task.index',
         meta: {
-          title: i18n.t('task'),
+          title: 'task',
           icon: 'mdi-view-list',
         },
         component: RouteWrapper,
@@ -180,7 +179,7 @@ export const protectedRoute = [
             name: 'pms.task.list',
             component: () => import('@/views/pms/task/TaskList.vue'),
             meta: {
-              title: i18n.tc('task'),
+              title: 'task',
               icon: 'mdi-format-list-checks',
             },
           },
@@ -189,7 +188,7 @@ export const protectedRoute = [
             name: 'pms.project.list',
             component: () => import('@/views/pms/project/ProjectList.vue'),
             meta: {
-              title: i18n.tc('project'),
+              title: 'project',
               icon: 'mdi-view-list',
             },
           },
@@ -200,7 +199,7 @@ export const protectedRoute = [
         path: '/403',
         name: 'Forbidden',
         meta: {
-          title: i18n.t('access deny'),
+          title: 'access deny',
           hidden: true,
         },
         component: () => import('@/views/error/Deny.vue'),
