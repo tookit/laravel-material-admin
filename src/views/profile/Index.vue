@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <overview />
+        <overview-profile :profile="profile" />
       </v-col>
       <v-col :cols="12">
         <v-card tile>
@@ -26,17 +26,17 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import Overview from './Overview'
+import OverviewProfile from './OverviewProfile'
 import FormProfile from './FormProfile'
 export default {
   components: {
-    Overview,
+    OverviewProfile,
     FormProfile,
   },
   data() {
     return {
       defaultTab: 'overview',
+      profile: null,
     }
   },
   computed: {
@@ -47,12 +47,20 @@ export default {
           value: 'overview',
           element: FormProfile,
           bind: {
-            id: this.id,
             showHeader: true,
+            item: this.profile,
           },
         },
       ]
     },
+  },
+  created() {
+    this.$store
+      .dispatch('fetchProfile')
+      .then((resp) => {
+        this.profile = resp.data
+      })
+      .catch(() => {})
   },
 }
 </script>
