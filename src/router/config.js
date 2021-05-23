@@ -196,6 +196,15 @@ export const protectedRoute = [
       },
 
       {
+        path: '/me',
+        name: 'Profile',
+        meta: {
+          title: 'profile',
+          hidden: true,
+        },
+        component: () => import('@/views/profile/Index.vue'),
+      },
+      {
         path: '/403',
         name: 'Forbidden',
         meta: {

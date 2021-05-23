@@ -64,7 +64,7 @@ export default {
       profileMenus: [
         {
           icon: 'mdi-account',
-          href: '#',
+          href: '#/me',
           title: 'Profile',
           click: this.handleProfile,
         },
