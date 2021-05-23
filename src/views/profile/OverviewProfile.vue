@@ -1,23 +1,15 @@
 <template>
-  <v-sheet class="overview">
-    <image-picker v-model="model.avatar" class="overview-avatar" />
-    <div class="overview-info">
-      <v-list two-line class="overview-info__list pa-0">
-        <v-list-item href="#">
-          <v-list-item-content class="pt-0">
-            <v-list-item-title> {{ model.username }} </v-list-item-title>
-            <v-list-item-subtitle>Username</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item href="#">
-          <v-list-item-content>
-            <v-list-item-title>{{ model.gender }}</v-list-item-title>
-            <v-list-item-subtitle>Gender</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </div>
-  </v-sheet>
+  <v-card class="overview">
+    <v-toolbar flat>
+      <v-toolbar-title>Profile</v-toolbar-title>
+      <v-spacer />
+      <v-btn icon><v-icon>mdi-pencil</v-icon></v-btn>
+    </v-toolbar>
+    <v-card-text>
+      <image-picker v-model="model.avatar" class="overview-avatar" />
+    </v-card-text>
+    <v-card-actions> </v-card-actions>
+  </v-card>
 </template>
 
 <script>
@@ -48,12 +40,9 @@ export default {
 
 <style lang="sass" scoped>
 .overview
-  padding: 25px
-  display: flex
   &-avatar
     display: flex
     margin-right: 25px
   &-info
     display: flex
-    flex: 1 1 auto
 </style>

@@ -28,17 +28,15 @@ export default {
   },
   data() {
     return {
-      selectedItems: null,
-      image: null,
       showDialog: false,
-      showLightbox: false,
     }
   },
   computed: {},
-
   methods: {
     handleAttachMedia() {},
-    handleDetachMedia() {},
+    handleDetachMedia() {
+      this.$emit('input', null)
+    }
   },
 }
 </script>

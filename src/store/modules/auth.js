@@ -69,6 +69,16 @@ const actions = {
       return resp
     })
   },
+  updateProfile({ commit }, data) {
+    return request({
+      url: '/me',
+      method: 'post',
+      data: data,
+    }).then((resp) => {
+      commit('SET_LOGIN_PROFILE', resp.data)
+      return resp
+    })
+  },
 }
 const mutations = {
   SET_LOGIN(state, { access_token, expires_in }) {

@@ -1,9 +1,6 @@
 <template>
   <v-container>
     <v-row>
-      <v-col>
-        <overview-profile :profile="profile" />
-      </v-col>
       <v-col :cols="12">
         <v-card tile>
           <v-tabs v-model="defaultTab" class="border-bottom">
@@ -11,6 +8,9 @@
               {{ tab.text }}
             </v-tab>
             <v-spacer />
+            <v-btn icon>
+              <v-icon tag="a" @click="fetchProfile()">mdi-refresh</v-icon>
+            </v-btn>
           </v-tabs>
           <v-tabs-items v-model="defaultTab">
             <template v-for="tab in tabs">
@@ -26,16 +26,14 @@
 </template>
 
 <script>
-import OverviewProfile from './OverviewProfile'
 import FormProfile from './FormProfile'
 export default {
   components: {
-    OverviewProfile,
     FormProfile,
   },
   data() {
     return {
-      defaultTab: 'overview',
+      defaultTab: 'profile',
       profile: null,
     }
   },
@@ -43,8 +41,8 @@ export default {
     tabs() {
       return [
         {
-          text: 'Overview',
-          value: 'overview',
+          text: 'Profile',
+          value: 'profile',
           element: FormProfile,
           bind: {
             showHeader: true,
@@ -54,13 +52,16 @@ export default {
       ]
     },
   },
-  created() {
-    this.$store
-      .dispatch('fetchProfile')
-      .then((resp) => {
-        this.profile = resp.data
-      })
-      .catch(() => {})
+  created() {},
+  methods: {
+    fetchProfile() {
+      this.$store
+        .dispatch('fetchProfile')
+        .then((resp) => {
+          this.profile = resp.data
+        })
+        .catch(() => {})
+    },
   },
 }
 </script>

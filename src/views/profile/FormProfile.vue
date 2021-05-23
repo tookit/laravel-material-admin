@@ -13,7 +13,9 @@
 
 <script>
 import { VTextField, VTextarea, VAutocomplete } from 'vuetify/lib'
+import ImagePicker from '@/components/image/ImagePicker'
 import { mapGetters } from 'vuex'
+import { EMAIL } from '@/util/regex'
 export default {
   props: {
     item: Object,
@@ -25,11 +27,21 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['getUserGenders']),
     formTitle() {
       return 'Profile'
     },
     formItems() {
       return [
+        {
+          cols: 12,
+          element: ImagePicker,
+          props: {
+            name: 'avatar',
+            required: true,
+            outlined: true,
+          },
+        },
         {
           cols: 6,
           element: VTextField,
@@ -46,6 +58,7 @@ export default {
           props: {
             name: 'email',
             outlined: true,
+            rules: [(v) => !!v || 'This field is required', (v) => EMAIL.test(v) || 'Invalid email'],
           },
         },
         {
@@ -78,7 +91,7 @@ export default {
           props: {
             name: 'gender',
             outlined: true,
-            items: [],
+            items: this.getUserGenders,
           },
         },
       ]
