@@ -25,6 +25,8 @@ export default {
     PageList,
   },
   mixins: [Mixin],
-  created() {},
+  created() {
+    this.$store.dispatch('fetchProjectStatus')
+  },
 }
 </script>
