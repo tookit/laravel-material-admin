@@ -1,4 +1,6 @@
 import FormTask from './FormTask'
+import { VAutocomplete } from 'vuetify/lib'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -19,12 +21,25 @@ export default {
         {
           text: 'owner',
           value: 'owner',
-          width: 250,
         },
         {
           text: 'status',
           value: 'status',
-          width: 250,
+          width: 150,
+          render: (item) => {
+            return this.$createElement(VAutocomplete, {
+              props: {
+                items: this.getProjectStatus,
+                value: item.status,
+              },
+              on: {
+                change: (val) => {
+                  this.handleUpdateField('status', val, item)
+                },
+              },
+            })
+          },
+          sortable: true,
         },
         {
           text: 'Created',
@@ -51,11 +66,6 @@ export default {
       ],
       batchActions: [
         {
-          text: 'Edit Item',
-          icon: 'mdi-pencil',
-          click: this.handleEditItem,
-        },
-        {
           text: 'Delete Item',
           icon: 'mdi-delete',
           click: this.handleDeleteItem,
@@ -64,6 +74,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['getProjectStatus']),
     dataSource() {
       return (q) => {
         return this.$store.dispatch('fetchTask', q)
@@ -119,6 +130,11 @@ export default {
           this.$refs.grid.fetchRecords()
         })
       }
+    },
+    handleUpdateField(field, val, item) {
+      const data = {}
+      data[field] = val
+      this.$store.dispatch('updateTask', { id: item.id, data })
     },
   },
 }

@@ -26,7 +26,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getProjectList']),
+    ...mapGetters(['getProjectList', 'getProjectStatus']),
     formTitle() {
       return this.item ? 'Edit Project Task - ' + this.item.name : 'Create Project Task'
     },
@@ -66,16 +66,9 @@ export default {
           cols: 6,
           element: VAutocomplete,
           props: {
-            name: 'owner',
-            outlined: true,
-          },
-        },
-        {
-          cols: 6,
-          element: VAutocomplete,
-          props: {
             name: 'status',
             outlined: true,
+            items: this.getProjectStatus,
           },
         },
       ]
@@ -91,6 +84,7 @@ export default {
   },
   created() {
     this.$store.dispatch('fetchProject', { pageSize: -1 })
+    this.$store.dispatch('fetchProjectStatus')
   },
   methods: {
     handleSubmit() {
