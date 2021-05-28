@@ -196,6 +196,16 @@ export const protectedRoute = [
       },
 
       {
+        path: '/media',
+        name: 'Media',
+        meta: {
+          title: 'media',
+          icon: 'mdi-image',
+        },
+        component: () => import('@/views/media/MediaList.vue'),
+      },
+
+      {
         path: '/me',
         name: 'Profile',
         meta: {

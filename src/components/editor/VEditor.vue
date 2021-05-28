@@ -53,6 +53,9 @@ export default {
       buttons: btns,
       buttonsSM: btns,
       buttonsMD: btns,
+      sourceEditorNativeOptions: {
+        // mode: 'ace/mode/markdown',
+      },
     }
     const jodit = new Jodit(this.$refs.editor, Object.assign(this.option, defaultOptions))
     this.editor = jodit

@@ -7,7 +7,6 @@
           :headers="headers"
           :filter-items="filterItems"
           :actions="actions"
-          :batch-actions="batchActions"
           :data-source="dataSource"
           search-field="name"
           @create="handleCreateItem"
@@ -16,16 +15,17 @@
     </v-row>
   </v-container>
 </template>
+
 <script>
 import PageList from '@/components/page/PageList'
-import Mixin from './Project'
+import Mixin from './MediaList'
 export default {
   components: {
     PageList,
   },
   mixins: [Mixin],
   created() {
-    this.$store.dispatch('fetchProjectStatus')
+    this.$store.dispatch('fetchMediaType')
   },
 }
 </script>
