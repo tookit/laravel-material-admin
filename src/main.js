@@ -12,14 +12,10 @@ import '@mdi/font/css/materialdesignicons.css'
 import 'jodit/build/jodit.css'
 import VFormBuilder from '@/components/form-builder/VFormBuilder'
 
-import mavonEditor from 'mavon-editor'
-import 'mavon-editor/dist/css/index.css'
 import 'dropzone/dist/dropzone.css'
 
 Vue.config.productionTip = false
 Vue.component('VFormBuilder', VFormBuilder)
-Vue.use(VFormBuilder)
-Vue.use(mavonEditor)
 
 const app = new Vue({
   router,

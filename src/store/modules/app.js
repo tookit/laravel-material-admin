@@ -74,6 +74,7 @@ const mutations = {
   },
   HIDE_SNACKBAR(state) {
     state.snackbar.show = false
+    state.snackbar.text = null
   },
 }
 

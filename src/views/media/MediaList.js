@@ -1,5 +1,5 @@
 import { mapGetters } from 'vuex'
-import { VAutocomplete } from 'vuetify/lib'
+import { VAutocomplete, VImg } from 'vuetify/lib'
 import FormUpload from '@/components/form/FormUpload'
 export default {
   data() {
@@ -9,6 +9,27 @@ export default {
           text: 'id',
           value: 'id',
           sortable: true,
+        },
+        {
+          text: 'filename',
+          value: 'basename',
+          sortable: false,
+          render: (item) => {
+            return this.$createElement(VImg, {
+              class: 'ma-2',
+              props: {
+                small: true,
+                src: item.url,
+                height: 50,
+                width: 50,
+              },
+              on: {
+                click: () => {
+                  this.handleImageClick(item)
+                },
+              },
+            })
+          },
         },
         {
           text: 'name',
@@ -42,12 +63,6 @@ export default {
         },
       ],
       actions: [
-        // {
-        //   text: 'Edit Item',
-        //   icon: 'mdi-pencil',
-        //   click: this.handleEditItem,
-        //   enable: (item) => item.type !== 'system',
-        // },
         {
           text: 'Delete Item',
           icon: 'mdi-delete',
@@ -124,6 +139,9 @@ export default {
           this.$refs.grid.fetchRecords()
         })
       }
+    },
+    handleImageClick(item) {
+      console.log(item)
     },
   },
   created() {
