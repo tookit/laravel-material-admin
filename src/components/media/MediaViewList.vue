@@ -1,47 +1,165 @@
 <template>
-  <v-list dense class="grey lighten-5 media_manager__list">
-    <v-list-item-group v-model="selectedItem" color="primary">
-      <v-list-item v-for="(item, i) in items" :key="i" :value="item.path" exact @click="$emit('item:selected', item)">
-        <v-list-item-icon>
-          <v-icon v-text="computeIcon(item)"></v-icon>
-        </v-list-item-icon>
-        <v-list-item-content>
-          <v-list-item-title v-text="item.basename"></v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list-item-group>
-  </v-list>
+  <page-list
+    ref="grid"
+    :headers="headers"
+    :filter-items="filterItems"
+    :actions="actions"
+    :data-source="dataSource"
+    search-field="name"
+    @create="handleCreateItem"
+  />
 </template>
 
 <script>
+import PageList from '@/components/page/PageList'
+import { VAutocomplete, VImg } from 'vuetify/lib'
+import FormUpload from '@/components/form/FormUpload'
+import { mapGetters } from 'vuex'
 export default {
-  props: {
-    items: {
-      type: Array,
-      default: () => [],
-    },
+  components: {
+    PageList,
   },
   data() {
     return {
-      selectedItem: null,
-      icons: {
-        txt: 'mdi-format-text',
-        json: 'mdi-code-json',
-        html: 'mdi-language-html5',
-        png: 'mdi-image',
-        svg: 'mdi-svg',
-      },
+      headers: [
+        {
+          text: 'id',
+          value: 'id',
+          sortable: true,
+        },
+        {
+          text: 'filename',
+          value: 'basename',
+          sortable: false,
+          render: (item) => {
+            return this.$createElement(VImg, {
+              class: 'ma-2',
+              props: {
+                small: true,
+                src: item.url,
+                height: 50,
+                width: 50,
+              },
+              on: {
+                click: () => {
+                  this.handleImageClick(item)
+                },
+              },
+            })
+          },
+        },
+        {
+          text: 'name',
+          value: 'basename',
+          sortable: true,
+        },
+        {
+          text: 'Disk',
+          value: 'disk',
+          sortable: true,
+        },
+        {
+          text: 'Type',
+          value: 'aggregate_type',
+          sortable: false,
+        },
+        {
+          text: 'Size',
+          value: 'size',
+          sortable: false,
+        },
+        {
+          text: 'Created',
+          value: 'created_at',
+          sortable: true,
+        },
+        {
+          text: 'Action',
+          value: 'action',
+          sortable: false,
+        },
+      ],
+      actions: [
+        {
+          text: 'Delete Item',
+          icon: 'mdi-delete',
+          click: this.handleDeleteItem,
+          enable: (item) => item.type !== 'system',
+        },
+      ],
+      batchActions: [],
     }
   },
-  methods: {
-    computeIcon(item) {
-      return item.type === 'dir' ? 'mdi-folder' : this.computeFileIcon(item)
+  computed: {
+    ...mapGetters(['getMediaType']),
+    dataSource() {
+      return (q) => {
+        return this.$store.dispatch('fetchMedia', q)
+      }
     },
-    computeFileIcon(item) {
-      return this.icons[item.extension] ?? 'mdi-file'
+    filterItems() {
+      return [
+        {
+          element: VAutocomplete,
+          cols: 4,
+          props: {
+            name: 'aggregate_type',
+            items: this.getMediaType,
+          },
+        },
+      ]
+    },
+  },
+  watch: {},
+  methods: {
+    handleCreateItem() {
+      const dialog = this.$root.$dialog
+      dialog.loadComponent({
+        component: FormUpload,
+        data: {
+          uploadUrl: '/media',
+        },
+        on: {
+          'form:cancel': () => {
+            dialog.hide()
+          },
+          'form:success': () => {
+            this.$refs.grid.fetchRecords()
+            dialog.hide()
+          },
+        },
+      })
+      dialog.show()
+    },
+    handleEditItem(item) {
+      const dialog = this.$root.$dialog
+      dialog.loadComponent({
+        component: FormPermission,
+        data: {
+          item: item,
+        },
+        on: {
+          'form:cancel': () => {
+            dialog.hide()
+          },
+          'form:success': () => {
+            this.$refs.grid.fetchRecords()
+            dialog.hide()
+          },
+        },
+      })
+      dialog.show()
+    },
+    handleDeleteItem(item) {
+      if (window.confirm('Are you sure to delete this ?')) {
+        this.$store.dispatch('deleteMedia', item.id).then(() => {
+          this.$refs.grid.fetchRecords()
+        })
+      }
+    },
+    handleImageClick(item) {
+      console.log(item)
     },
   },
 }
 </script>
-
-<style></style>

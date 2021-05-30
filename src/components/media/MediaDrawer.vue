@@ -34,23 +34,14 @@ export default {
           heading: this.$t('file_type'),
         },
         {
-          title: this.$t('video'),
-          icon: 'video',
-        },
-
-        {
           title: this.$t('image'),
           icon: 'jpg',
+          to: '/media?aggregate_type=image',
         },
         {
           title: this.$t('document'),
           icon: 'doc',
-        },
-        {
-          heading: this.$t('cloud'),
-        },
-        {
-          heading: this.$t('Tag'),
+          to: '/media?aggregate_type=document',
         },
       ],
     }
