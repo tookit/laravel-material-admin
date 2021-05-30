@@ -8,12 +8,18 @@
     search-field="name"
     @create="handleCreateItem"
     @input="(rows) => $emit('input', rows)"
-  />
+  >
+    <template #[`item.id`]="{ item }">
+      <svg class="icon" aria-hidden="true">
+        <use :xlink:href="getIconByExt(item.extension)"></use>
+      </svg>
+    </template>
+  </page-list>
 </template>
 
 <script>
 import PageList from '@/components/page/PageList'
-import { VAutocomplete, VImg } from 'vuetify/lib'
+import { VAutocomplete } from 'vuetify/lib'
 import FormUpload from '@/components/form/FormUpload'
 import { mapGetters } from 'vuex'
 export default {
@@ -29,33 +35,11 @@ export default {
     return {
       headers: [
         {
-          text: 'id',
+          text: '',
           value: 'id',
-          sortable: true,
         },
         {
           text: 'filename',
-          value: 'basename',
-          sortable: false,
-          render: (item) => {
-            return this.$createElement(VImg, {
-              class: 'ma-2',
-              props: {
-                small: true,
-                src: item.url,
-                height: 50,
-                width: 50,
-              },
-              on: {
-                click: () => {
-                  this.handleImageClick(item)
-                },
-              },
-            })
-          },
-        },
-        {
-          text: 'name',
           value: 'basename',
           sortable: true,
         },
@@ -63,11 +47,6 @@ export default {
           text: 'Disk',
           value: 'disk',
           sortable: true,
-        },
-        {
-          text: 'Type',
-          value: 'aggregate_type',
-          sortable: false,
         },
         {
           text: 'Size',
@@ -97,7 +76,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getMediaType']),
+    ...mapGetters(['getMediaType', 'getIconByExt']),
     dataSource() {
       return (q) => {
         return this.$store.dispatch('fetchMedia', q)
@@ -169,3 +148,11 @@ export default {
   },
 }
 </script>
+<style lang="sass" scoped>
+.icon
+  width: 36px
+  height: 36px
+  vertical-align: -0.15em
+  fill: currentColor
+  overflow: hidden
+</style>

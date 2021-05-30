@@ -67,6 +67,7 @@ export default {
         path: this.$route.path,
         query: {
           aggregate_type: type,
+          t: Date.now(),
         },
       })
     },
@@ -83,6 +84,7 @@ export default {
   &-main
     display: flex
     &__drawer
+      min-width: 232px
       border-right: 1px solid #eee
       min-height: 600px
     &__content
