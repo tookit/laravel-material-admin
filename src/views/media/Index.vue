@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <v-row>
-      <v-col>
-        <media-manager />
+      <v-col :cols="12">
+        <media-manager show-header />
       </v-col>
     </v-row>
   </v-container>

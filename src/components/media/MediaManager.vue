@@ -7,20 +7,23 @@
       <media-drawer class="media-main__drawer" @type:change="handleTypeChange" />
       <section class="media-main__content">
         <div class="flex">
-          <v-toolbar flat dense class="border-bottom">
+          <v-toolbar flat dense class="border-bottom" tag="div">
             <v-breadcrumbs :items="path" />
-            <v-spacer />
-            <v-btn icon>
-              <v-icon>mdi-view-grid</v-icon>
-            </v-btn>
-            <v-btn icon>
-              <v-icon>mdi-view-list</v-icon>
-            </v-btn>
+            <v-btn-toggle v-model="viewMode" tile dense mandatory>
+              <v-btn icon value="grid">
+                <v-icon>mdi-view-grid</v-icon>
+              </v-btn>
+              <v-btn icon value="list">
+                <v-icon>mdi-view-list</v-icon>
+              </v-btn>
+            </v-btn-toggle>
           </v-toolbar>
           <template v-if="viewMode === 'list'">
             <media-view-list ref="list" :data-source="dataSource" @input="(rows) => $emit('input', rows)" />
           </template>
-          <template v-else> </template>
+          <template v-else>
+            <media-view-card :data-source="dataSource" />
+          </template>
         </div>
       </section>
     </div>
@@ -29,11 +32,13 @@
 
 <script>
 import MediaDrawer from './MediaDrawer.vue'
+import MediaViewCard from './MediaViewCard.vue'
 import MediaViewList from './MediaViewList.vue'
 export default {
   components: {
     MediaDrawer,
     MediaViewList,
+    MediaViewCard,
   },
   props: {
     inDialog: Boolean,
