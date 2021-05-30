@@ -199,10 +199,10 @@ export const protectedRoute = [
         path: '/media',
         name: 'Media',
         meta: {
-          title: 'media',
+          title: 'media.manager',
           icon: 'mdi-image',
         },
-        component: () => import('@/views/media/MediaList.vue'),
+        component: () => import('@/views/media/Index.vue'),
       },
 
       {
