@@ -1,10 +1,10 @@
 <template>
   <v-sheet class="media">
-    <v-toolbar tag="div" flat class="media-toolbar primary" dark>
+    <v-toolbar v-show="showHeader" tag="div" flat class="media-toolbar primary" dark>
       <v-toolbar-title> {{ title }}</v-toolbar-title>
     </v-toolbar>
     <div class="media-main">
-      <media-drawer class="media-main__drawer" />
+      <media-drawer class="media-main__drawer" @type:change="handleTypeChange" />
       <section class="media-main__content">
         <div class="flex">
           <v-toolbar flat dense class="border-bottom">
@@ -18,7 +18,7 @@
             </v-btn>
           </v-toolbar>
           <template v-if="viewMode === 'list'">
-            <media-view-list ref="list" :data-source="dataSource" />
+            <media-view-list ref="list" :data-source="dataSource" @input="(rows) => $emit('input', rows)" />
           </template>
           <template v-else> </template>
         </div>
@@ -35,11 +35,17 @@ export default {
     MediaDrawer,
     MediaViewList,
   },
+  props: {
+    inDialog: Boolean,
+    showHeader: Boolean,
+    value: Array,
+  },
   data() {
     return {
       title: 'Media Drive',
       viewMode: 'list',
       path: ['/'],
+      selectedItems: [],
     }
   },
   computed: {
@@ -55,6 +61,14 @@ export default {
   methods: {
     handleRefresh() {
       this.$refs.list.fetchRecords()
+    },
+    handleTypeChange(type) {
+      this.$router.push({
+        path: this.$route.path,
+        query: {
+          aggregate_type: type,
+        },
+      })
     },
   },
 }

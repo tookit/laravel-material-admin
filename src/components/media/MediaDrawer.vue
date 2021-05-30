@@ -1,16 +1,12 @@
 <template>
   <v-navigation-drawer floating permanent>
     <v-list class="media-list pa-0">
-      <template v-for="item in items">
-        <template v-if="item.heading">
-          <v-subheader :key="item.heading">
-            {{ item.heading }}
-          </v-subheader>
-        </template>
-        <template v-else>
-          <v-list-item :key="item.text" link exact :to="item.to">
+      <v-subheader>Type</v-subheader>
+      <v-list-item-group v-model="type">
+        <template v-for="item in items">
+          <v-list-item :key="item.text" :value="item.value">
             <v-list-item-icon v-if="item.icon">
-              <svg class="icon" aria-hidden="true">
+              <svg class="c-icon" aria-hidden="true">
                 <use :xlink:href="getIconByExt(item.icon)"></use>
               </svg>
             </v-list-item-icon>
@@ -19,7 +15,7 @@
             </v-list-item-content>
           </v-list-item>
         </template>
-      </template>
+      </v-list-item-group>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -29,19 +25,23 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
+      type: 'image',
       items: [
-        {
-          heading: this.$t('file_type'),
-        },
         {
           title: this.$t('image'),
           icon: 'jpg',
-          to: '/media?aggregate_type=image',
+          value: 'image',
         },
+        {
+          title: this.$t('video'),
+          icon: 'video',
+          value: 'video',
+        },
+
         {
           title: this.$t('document'),
           icon: 'doc',
-          to: '/media?aggregate_type=document',
+          value: 'document',
         },
       ],
     }
@@ -49,18 +49,23 @@ export default {
   computed: {
     ...mapGetters(['getIconByExt']),
   },
+  watch: {
+    type: {
+      handler(val) {
+        if (val) {
+          this.$emit('type:change', val)
+        }
+      },
+      immediate: true,
+    },
+  },
 }
 </script>
 
 <style lang="sass" scoped>
-.center-align
-  position: absolute
-  left: 50%
-  top: 50%
-  transform: translateY(-50%) translateX(-50%)
-.icon
-  width: 28px
-  height: 28px
+.c-icon
+  width: 36px
+  height: 36px
   vertical-align: -0.15em
   fill: currentColor
   overflow: hidden

@@ -2,7 +2,7 @@
   <div>
     <template v-if="!value">
       <div class="image-holder">
-        <v-icon size="24">mdi-plus</v-icon>
+        <v-icon size="24" @click="showDialog = true">mdi-plus</v-icon>
       </div>
     </template>
     <template v-else>
@@ -17,26 +17,52 @@
         </v-hover>
       </div>
     </template>
+    <v-dialog v-model="showDialog">
+      <v-card>
+        <v-toolbar dark color="primary">
+          <v-toolbar-title>Media Manager</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-btn v-show="selectedItems.length > 0" icon @click="handleApplyMedia(selectedItems)">
+            <v-icon>mdi-check</v-icon>
+          </v-btn>
+          <v-btn icon @click="showDialog = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-toolbar>
+        <v-card-text class="pa-0">
+          <media-manager v-model="selectedItems" />
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script>
+import MediaManager from '@/components/media/MediaManager'
+
 export default {
-  components: {},
+  components: {
+    MediaManager,
+  },
   props: {
     value: String,
   },
   data() {
     return {
+      selectedItems: [],
       showDialog: false,
     }
   },
   computed: {},
   methods: {
-    handleAttachMedia() {},
+    handleApplyMedia(items) {
+      const media = items[0]
+      this.$emit('input', media.url)
+      this.showDialog = false
+    },
     handleDetachMedia() {
       this.$emit('input', null)
-    }
+    },
   },
 }
 </script>

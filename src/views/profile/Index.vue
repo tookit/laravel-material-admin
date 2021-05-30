@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col :cols="12">
-        <v-card tile>
+        <v-card tile :loading="loading">
           <v-tabs v-model="defaultTab" class="border-bottom">
             <v-tab v-for="tab in tabs" :key="tab.value" :href="'#' + tab.value">
               {{ tab.text }}
@@ -35,6 +35,7 @@ export default {
     return {
       defaultTab: 'profile',
       profile: null,
+      loading: false,
     }
   },
   computed: {
@@ -52,15 +53,21 @@ export default {
       ]
     },
   },
-  created() {},
+  created() {
+    this.fetchProfile()
+  },
   methods: {
     fetchProfile() {
+      this.loading = true
       this.$store
         .dispatch('fetchProfile')
         .then((resp) => {
+          this.loading = false
           this.profile = resp.data
         })
-        .catch(() => {})
+        .catch(() => {
+          this.loading = false
+        })
     },
   },
 }

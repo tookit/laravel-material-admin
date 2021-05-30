@@ -7,6 +7,7 @@
     :data-source="dataSource"
     search-field="name"
     @create="handleCreateItem"
+    @input="(rows) => $emit('input', rows)"
   />
 </template>
 
@@ -18,6 +19,11 @@ import { mapGetters } from 'vuex'
 export default {
   components: {
     PageList,
+  },
+  props: {
+    value: {
+      type: Array,
+    },
   },
   data() {
     return {

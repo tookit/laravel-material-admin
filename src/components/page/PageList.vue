@@ -56,7 +56,7 @@
       @update:page="handleApplyFilter"
       @update:sort-by="handleApplyFilter"
       @update:sort-desc="handleApplyFilter"
-      @click:row="handleRowClick"
+      @input="$emit('input',selectedItems)"
       @sortable:onUpdate="handleOnSort"
     >
       <template #top>
@@ -166,7 +166,6 @@ export default {
   },
   computed: {
     showBatchAction() {
-      console.log(this.batchActions.length)
       return this.batchActions.length > 0 && this.selectedItems.length > 0
     },
   },
@@ -304,9 +303,6 @@ export default {
       } else {
         return true
       }
-    },
-    handleRowClick(row) {
-      this.selectedItems = [row]
     },
     handleOnSort(e) {
       this.$emit('sortable:onSort', e)
