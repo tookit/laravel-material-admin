@@ -80,7 +80,6 @@ export default {
     &__drawer
       min-width: 232px
       border-right: 1px solid #eee
-      min-height: 600px
     &__content
       display: flex
       flex-grow: 1
