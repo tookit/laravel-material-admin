@@ -78,7 +78,7 @@ export default {
   &-main
     display: flex
     &__drawer
-      min-width: 232px
+      min-width: 228px
       border-right: 1px solid #eee
     &__content
       display: flex

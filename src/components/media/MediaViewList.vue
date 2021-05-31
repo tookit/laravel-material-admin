@@ -10,9 +10,14 @@
     @input="(rows) => $emit('input', rows)"
   >
     <template #[`item.id`]="{ item }">
-      <svg class="icon" aria-hidden="true">
-        <use :xlink:href="getIconByExt(item.extension)"></use>
-      </svg>
+      <template v-if="item.aggregate_type === 'image'">
+        <v-img class="ma-2" :src="item.url" height="50" width="50" /> 
+      </template>
+      <template v-else>
+        <svg class="icon" aria-hidden="true">
+          <use :xlink:href="getIconByExt(item.extension)"></use>
+        </svg>
+      </template>
     </template>
   </page-list>
 </template>
