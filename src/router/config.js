@@ -87,7 +87,7 @@ export const protectedRoute = [
           },
           {
             path: '/cms/post/edit/:id',
-            name: 'cms.post.list',
+            name: 'cms.post.edit',
             props: true,
             component: () => import('@/views/cms/post/PostItem.vue'),
             meta: {
@@ -199,7 +199,7 @@ export const protectedRoute = [
         path: '/media',
         name: 'Media',
         meta: {
-          title: 'media.manager',
+          title: 'media',
           icon: 'mdi-image',
         },
         component: () => import('@/views/media/Index.vue'),
