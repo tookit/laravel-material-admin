@@ -1,23 +1,21 @@
 <template>
-  <v-navigation-drawer floating permanent>
-    <v-list class="media-list pa-0">
-      <v-subheader>Type</v-subheader>
-      <v-list-item-group v-model="type">
-        <template v-for="item in items">
-          <v-list-item :key="item.text" :value="item.value">
-            <v-list-item-icon v-if="item.icon">
-              <svg class="c-icon" aria-hidden="true">
-                <use :xlink:href="getIconByExt(item.icon)"></use>
-              </svg>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </template>
-      </v-list-item-group>
-    </v-list>
-  </v-navigation-drawer>
+  <v-list class="media-list pa-0">
+    <v-subheader>Type</v-subheader>
+    <v-list-item-group v-model="type">
+      <template v-for="item in items">
+        <v-list-item :key="item.text" :value="item.value">
+          <v-list-item-icon v-if="item.icon">
+            <svg class="c-icon" aria-hidden="true">
+              <use :xlink:href="getIconByExt(item.icon)"></use>
+            </svg>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </template>
+    </v-list-item-group>
+  </v-list>
 </template>
 
 <script>

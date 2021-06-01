@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { VTextField, VTextarea, VAutocomplete } from 'vuetify/lib'
+import { VTextField, VAutocomplete } from 'vuetify/lib'
 import ImagePicker from '@/components/image/ImagePicker'
 import { mapGetters } from 'vuex'
 import { EMAIL } from '@/util/regex'
@@ -81,7 +81,7 @@ export default {
           cols: 6,
           element: VTextField,
           props: {
-            name: 'mobile',
+            name: 'phone',
             outlined: true,
           },
         },
